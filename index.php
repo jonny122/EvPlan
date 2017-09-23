@@ -2,7 +2,9 @@
 <html lang="en" ng-app>
 <head>
 	<meta charset="UTF-8">
-	<?php include ("./Assets/header.php");?>
+	<link rel="stylesheet" href="./Assets/Bootstrap/css/bootstrap.min.css">
+	<script src="./Assets/angular.min.js"></script>
+	<script src="./Assets/jquery-3.2.1.js"></script>
 	<title>EvPlan | Inicio</title>
 </head>
 <body>
@@ -12,7 +14,7 @@
 	<nav>
 		<ul>
 			<li><a href="">Inicia sesión</a></li>
-			<li><a href="">Registrate</a></li>
+			<li><a href="./Views/Registrarse.php">Registrate</a></li>
 		</ul>
 	</nav>
 	<section>
