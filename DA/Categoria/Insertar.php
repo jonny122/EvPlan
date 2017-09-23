@@ -4,7 +4,7 @@ if(!empty($_POST)){
 		if($_POST["Id"]!="" && $_POST["Estado"]!=""){
 			include "../Conexion.php";
 			
-			$Id = $_POST["Id"];
+			$Id = 0;
 			$Estado = $_POST["Estado"];
 			$conn = Conectar();
 			
