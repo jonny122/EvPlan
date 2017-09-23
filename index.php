@@ -13,7 +13,7 @@
 	</header>
 	<nav>
 		<ul>
-			<li><a href="">Inicia sesión</a></li>
+			<li><a href="./Views/Login.php">Inicia sesión</a></li>
 			<li><a href="./Views/Registrarse.php">Registrate</a></li>
 		</ul>
 	</nav>
