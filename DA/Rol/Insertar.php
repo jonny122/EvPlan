@@ -3,8 +3,9 @@
 
 	function insertarCuenta($cuenta){
 		$conn = Conectar();
-		$statement = $conn->prepare("CALL ROLUSUARIO_INSERTAR(?,?,?,?)");
-		$statement->bind_param("sssi", $cuenta['rol'],$cuenta['nombre'], $cuenta['passwor'], $cuenta['id']);
+		$id = 0;
+		$statement = $conn->prepare("CALL ROLUSUARIO_INSERTAR(?,?,?,?,?)");
+		$statement->bind_param("isssi", $id,$cuenta['rol'],$cuenta['nombre'], $cuenta['passwor'], $cuenta['id']);
 		if(($statement->execute()) or die($conn->error)){
 			return true;
 		}

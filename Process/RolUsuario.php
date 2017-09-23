@@ -18,7 +18,7 @@
 		$cuenta = array('rol' => $rol, 'nombre' => $nombre, 'passwor' => $passwor, 'id' => $id); 
 		$result = insertarCuenta($cuenta);
 		if($result == true){
-			header("Location: ../Views/Usuario.php");
+			header("Location: ../Views/Login.php");
 		}
 	}
 
