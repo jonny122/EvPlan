@@ -1,10 +1,10 @@
 <?php
 	require ("../DA/Conexion.php");
 
-	function actualizarUsuario($usuario){
+	function actualizarUsuario($cuenta){
 		$conn = Conectar();
-		$statement = $conn->prepare("CALL USUARIO_ACTUALIZAR(?,?,?,?,?,?)");
-		$statement->bind_param("isssss", $usuario["id"],$usuario['nombre'], $usuario['apellido1'], $usuario['apellido2'], $usuario['correo'], $usuario['telefono']);
+		$statement = $conn->prepare("CALL ROLUSUARIO_ACTUALIZAR(?,?,?,?)");
+		$statement->bind_param("sssi", $cuenta['rol'],$cuenta['nombre'], $cuenta['passwor'], $cuenta['id']);
 		if(($statement->execute()) or die($conn->error)){
 			return true;
 		}

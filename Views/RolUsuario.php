@@ -14,8 +14,8 @@
 		<form method="POST" action="../Process/RolUsuario.php">
 			<input class="form-control" type="text" name="id" id="id" placeholder="Cédula"><br />
 			<input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre"><br />
-			<input class="form-control" type="text" name="passwor" id="passwor" placeholder="passwor"><br />
-			<input class="form-control" type="text" name="repetir_contraseña" id="repetir_contraseña" placeholder="Repetir contraseña"><br />
+			<input class="form-control" type="password" name="passwor" id="passwor" placeholder="passwor"><br />
+			<input class="form-control" type="password" name="repetir_contraseña" id="repetir_contraseña" placeholder="Repetir contraseña"><br />
 			<select class="form-control" type="text" name="rol" id="rol">
 			  <option value="voluntario">Voluntario</option>
 			  <option value="Administrador">Administrador</option>

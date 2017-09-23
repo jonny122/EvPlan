@@ -1,9 +1,9 @@
 <?php
 	require ("../DA/Conexion.php");
 
-	function eliminarUsuario($id){
+	function eliminarCuenta($id){
 		$conn = Conectar();
-		$statement = $conn->prepare("CALL USUARIO_ELIMINAR(?)");
+		$statement = $conn->prepare("CALL ROLUSUARIO_ELIMINAR(?)");
 		$statement->bind_param("i", $id);
 		if(($statement->execute()) or die($conn->error)){
 			return true;

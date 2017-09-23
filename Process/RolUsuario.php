@@ -23,19 +23,17 @@
 	}
 
 	function actualizar(){
-		$id = $_POST['id'];
+		$rol = $_POST['rol'];
 		$nombre = $_POST['nombre'];
-		$apellido1 = $_POST['apellido1'];
-		$apellido2 = $_POST['apellido2'];
-		$correo = $_POST['correo'];
-		$telefono =	$_POST['telefono'];
-		$usuario = array('id' => $id, 'nombre' => $nombre, 'apellido1' => $apellido1, 'apellido2' => $apellido2, 'correo' => $correo, 'telefono' => $telefono); 
-		$result = actualizarUsuario($usuario);
+		$id = $_POST['id'];
+		$passwor = $_POST['passwor'];
+		$cuenta = array('rol' => $rol, 'nombre' => $nombre, 'passwor' => $passwor, 'id' => $id); 
+		$result = actualizarCuenta($cuenta);
 	}
 
 	function eliminar(){
 		$id = $_POST['id'];
-		$result = eliminarUsuario($usuario);
+		$result = eliminarCuenta($cuenta);
 	}
 	
 ?>
