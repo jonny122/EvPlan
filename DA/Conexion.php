@@ -1,7 +1,7 @@
 <?php
 	define("Server",     "localhost");
 	define("User",     "root");
-	define("Password",     "");
+	define("Password",     "1234");
 	define("DB",     "organigrama");
 
 	function Conectar(){
