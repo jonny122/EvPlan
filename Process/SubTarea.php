@@ -24,7 +24,7 @@
 		$subtarea = array('nombre' => $nombre, 'detalle' => $detalle, 'estado' => $estado, 'requisitos' => $requisitos, 'cantidad' => $cantidad, 'total' => $total, 'idTarea' => $idTarea); 
 		$result = insertarSubtarea($subtarea);
 		if($result == true){
-			//header("Location: ../Views/Login.php");
+			header("Location: ../Views/Login.php");
 		}
 	}
 
