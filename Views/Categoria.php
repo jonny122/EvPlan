@@ -1,7 +1,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<?php include ("../Assets/header.php");?>
+	<?php include ("./Assets/header.php");?>
 	<title>Categoria</title>
 </head>
 <body>

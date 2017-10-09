@@ -1,6 +1,6 @@
 <?php
 	require ('../DA/Actividad/Insertar.php');
-
+	//require ('../DA/Categoria/CargarCategorias.php');
 	if($_POST['action'] == "registro"){
 		insertar();
 	}elseif($_POST['action'] == "actualizar"){
@@ -8,11 +8,10 @@
 	}elseif($_POST['action'] == "eliminar"){
 		eliminar();
 	}
-    
 
 	function insertar(){
 
-		$id = $_POST['id'];
+		//$id = $_POST['id'];
 		$nombre = $_POST['nombre'];
 		$region = $_POST['region'];
 		$proposito = $_POST['proposito'];
@@ -26,7 +25,7 @@
 		$actividad = array('nombre' => $nombre, 'region' => $region, 'proposito' => $proposito, 'requisito' => $requisito, 'detalle' => $detalle, 'cantidadPersona' => $cantidadPersona, 'cantidadTotal' => $cantidadTotal, 'idCategoria' => $idCategoria, 'idUsuario' => $idUsuario); 
 		$result = insertarActividad($actividad);
 		if($result == true){
-			//header("Location: ../Views/Login.php");
+			header("Location: ../Views/Tarea.php");
 		}
 	}
 

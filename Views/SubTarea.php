@@ -2,12 +2,22 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<?php include ("../Assets/header.php");?>
+	<?php include ("./Assets/header.php");?>
 	<title>EvPlan | Subtareas</title>
 </head>
 <body>
-	<header>
-		<h1>Registro de Subtareas</h1>
+	<header class="col-lg-12">
+		<h1>Subtareas para la actividad <?php echo @$_SESSION['tarea'];?> 
+			<div style="float: right; font-size: 18px;">
+				<img src="./Images/user.jpg" height=40 width=60>
+				<a href="javascript:void(0);" id="userMenu"><?php session_start(); echo $_SESSION['user'];?></a>
+				<div id="menu" style="display: none;">
+					<ul class="list-group">
+						<li class="list-group-item"><a href="logout">Cerrar Sesión</a></li>
+					</ul>
+				</div>
+			</div>
+		</h1>
 	</header>
 	<div class="container">
 		<hr /><br />
@@ -21,8 +31,15 @@
 			<input class="form-control" type="text" name="idTarea" id="idTarea" placeholder="idTarea"><br />
 			<input type="hidden" name="action" id="action" value="registro" /> 
 			<button type="submit" class="btn btn-success">Agregar</button>
-			<a class="btn btn-primary" href="javascript:void(0);" onclick="window.location = '../index.php'">Regresar</a>
+			<a class="btn btn-primary" href="javascript:void(0);" onclick="window.location = '/EvPlan/'">Regresar</a>
 		</form>
 	</div>
+	<script>
+		$(document).ready(function(){
+			$("#userMenu").click(function(){
+		        $("#menu").slideToggle("slow");
+		    });
+		});
+	</script>
 </body>
 </html>

@@ -21,7 +21,7 @@
 		$usuario = array('id' => $id, 'nombre' => $nombre, 'apellido1' => $apellido1, 'apellido2' => $apellido2, 'correo' => $correo, 'telefono' => $telefono); 
 		$result = insertarUsuario($usuario);
 		if($result == true){
-			header("Location: ../Views/Login.php");
+			//header("Location: ../Views/Login.php");
 		}
 	}
 

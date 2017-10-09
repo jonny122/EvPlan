@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<?php include ("../Assets/header.php");?>
+	<?php include ("./Assets/header.php");?>
 	<title>EvPlan | Registrarse</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
 			<input class="form-control" type="text" name="telefono" id="telefono" placeholder="Teléfono"><br />
 			<input type="hidden" name="action" id="action" value="registro" /> 
 			<button type="submit" class="btn btn-success">Enviar</button>
-			<a class="btn btn-primary" href="javascript:void(0);" onclick="window.location = '../index.php'">Regresar</a>
+			<a class="btn btn-primary" href="javascript:void(0);" onclick="window.location = '/EvPlan/'">Regresar</a>
 		</form>
 	</div>
 </body>
