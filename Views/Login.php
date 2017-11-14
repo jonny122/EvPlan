@@ -7,7 +7,7 @@
 	<link href="./Views/css/prettyPhoto.css" rel="stylesheet" type="text/css" />
 	<link href="./Views/css/animate.css" rel="stylesheet" type="text/css" media="all" />
     <link href="./Views/css/owl.carousel.css" rel="stylesheet">
-	<link href="./Views/css/style.css" rel="stylesheet" type="text/css" />
+	<!--<link href="./Views/css/style.css" rel="stylesheet" type="text/css" />-->
     
 	<!-- FONTS -->
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500italic,700,500,700italic,900,900italic' rel='stylesheet' type='text/css'>
@@ -30,9 +30,9 @@
 	<?php require_once "./Utilities/router.php";?>
 	<title>EvPlan | Inicio de sesión</title>
 </head>
-<body>
+<body style="background-image:url(./Images/slider/slide2_bg.jpg);">
 	<header>
-		<h1>Inicia sesión</h1>
+		<h1 id="mainTitle">Inicia sesión</h1>
 	</header>
 	<div class="container">
 		<hr /><br />		
@@ -43,5 +43,10 @@
 			<a class="btn btn-primary" href="javascript:void(0);" onclick="window.location = '/EvPlan/'">Regresar</a>
 		</form>
 	</div>
+	<script>
+		$(document).ready(function(){
+			$("#mainTitle").css("color", "white");
+		});
+	</script>
 </body>
 </html>

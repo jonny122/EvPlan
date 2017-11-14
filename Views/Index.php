@@ -130,19 +130,19 @@
 				<ul class="slides">
 					<li class="slide1">
 						<div class="flex_caption1">
-							<p class="title1 captionDelay2 FromTop">Aquí</p>
-							<p class="title2 captionDelay4 FromTop">No sé</p>
-							<p class="title3 captionDelay6 FromTop">Qué poner</p>
-							<p class="title4 captionDelay7 FromBottom">Y aquí tampoco XD</p>
+							<p class="title1 captionDelay2 FromTop">Agenda</p>
+							<p class="title2 captionDelay4 FromTop">y organiza</p>
+							<p class="title3 captionDelay6 FromTop">tus actividades</p>
+							<p class="title4 captionDelay7 FromBottom">con EvPlan</p>
 						</div>
 					</li>
 						<!-- <a class="slide_btn FromRight" href="javascript:void(0);" >Read More</a> -->
 					<li class="slide2">
 						<div class="flex_caption1">
-							<p class="title1 captionDelay6 FromLeft">Aquí</p>
-							<p class="title2 captionDelay4 FromLeft">Tampoco sé</p>
-							<p class="title3 captionDelay2 FromLeft">Qué poner</p>
-							<p class="title4 captionDelay7 FromLeft">Jajaja XD</p>
+							<p class="title1 captionDelay6 FromLeft">EvPlan</p>
+							<p class="title2 captionDelay4 FromLeft">como tu</p>
+							<p class="title3 captionDelay2 FromLeft">mejor opción</p>
+							<p class="title4 captionDelay7 FromLeft">para organizar tus actividades</p>
 						</div>
 						<!-- <a class="slide_btn FromRight" href="javascript:void(0);" >Read More</a> -->
 					</li>
@@ -185,25 +185,25 @@
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-ss-12 margbot30">
 							<a class="services_item" href="javascript:void(0);" >
 								<p><b>Crea</b> tu actividad</p>
-								<span>Quality and very comfortable design, does not hurt the eyes and pleasant to use.</span>
+								<!--<span>Quality and very comfortable design, does not hurt the eyes and pleasant to use.</span>-->
 							</a>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-ss-12 margbot30">
 							<a class="services_item" href="javascript:void(0);" >
 								<p><b>Controla</b> las tareas</p>
-								<span>Quality and unique design that meets all the requirements and trends of modern web design.</span>
+								<!--<span>Quality and unique design that meets all the requirements and trends of modern web design.</span>-->
 							</a>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-ss-12 margbot30">
 							<a class="services_item" href="javascript:void(0);" >
 								<p><b>Reduce</b> el desorden</p>
-								<span>Design that will be equally beautifully displayed on all your devices, tablet, smartphone or computer.</span>
+								<!--<span>Design that will be equally beautifully displayed on all your devices, tablet, smartphone or computer.</span>-->
 							</a>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-ss-12 margbot30">
 							<a class="services_item" href="javascript:void(0);" >
 								<p><b>Ahorra</b> tiempo & dinero</p>
-								<span>Hour and great support template. You can always ask a question and we will help you.</span>
+								<!--<span>Hour and great support template. You can always ask a question and we will help you.</span>-->
 							</a>
 						</div>
 					</div><!-- //ROW -->

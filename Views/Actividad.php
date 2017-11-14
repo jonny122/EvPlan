@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,8 +65,23 @@
 					// this callback gets executed anytime an image is converted
 				}
 			});
+
 		});
-		
+		function loadActivities(){
+			var idUsuario = '<?php echo $_SESSION["idUsuario"];?>';
+			$.ajax({
+				data: {"id" : idUsuario, "action" : "listar"},
+				type: "Post",
+				url: './Process/Actividad/ListarActividades.php',
+				success: function(response){
+					console.log("exito");
+					console.log(response);
+				},
+				error: function(err){
+					console.log(err);
+				}
+			})
+		}
 	</script>
 
 </head>
@@ -90,7 +106,7 @@
 					
 					<!-- LOGO -->
 					<div class="logo pull-left">
-						<a href="index.html" ><span class="b1">E</span><span class="b2">v</span><span class="b3">P</span><span class="b4">l</span><span class="b5">a</span><span class="b5">n</span></a>
+						<a href="index" ><span class="b1">E</span><span class="b2">v</span><span class="b3">P</span><span class="b4">l</span><span class="b5">a</span><span class="b5">n</span></a>
 					</div><!-- //LOGO -->
 					
 					<!-- SEARCH FORM -->
@@ -104,24 +120,12 @@
 					<div class="pull-right">
 						<nav class="navmenu center">
 							<ul>
-								<li><a href="index.html#home">Inicio</a></li>
-								<!-- <li class="first active scroll_btn"><a href="#home" >Inicio</a></li> -->
-								<!-- <li class="scroll_btn"><a href="#about" >Acerca de EvPlan</a></li> -->
-								<li><a href="index.html#about">Acerca de EvPlan</a></li>
-								<!-- <li ><a href="#projects">Projects</a></li> -->
-								<li ><a href="actividades.html">Actividades</a></li>
-								<li ><a href="equipo.html">Nuestro equipo</a></li>
-								<li ><a href="blanco.html">Blanco</a></li>
-								<li ><a href="contactos.html">Contactos</a></li>
-								<!-- <li class="scroll_btn last"><a href="#contacts" >Contactos</a></li> -->
-								<li class="sub-menu">
-									<a href="javascript:void(0);" >Pages</a>
-									<ul>
-										<li><a href="blog.html" >Blog</a></li>
-										<li><a href="blog-post.html" >Blog Post</a></li>
-										<li><a href="portfolio-post.html" >Portfolio Single Work</a></li>
-									</ul>
+								<li class="first active scroll_btn">
+									<a href="javascript:void(0);" id="userMenu"><img src="./Images/user.jpg" height="60" width="40" alt=""><?php echo @$_SESSION['user'];?></a>
 								</li>
+								<!-- <li class="scroll_btn"><a href="#about" >Acerca de EvPlan</a></li> -->
+								<!-- <li ><a href="#projects">Projects</a></li> -->
+								<!-- <li class="scroll_btn last"><a href="#contacts" >Contactos</a></li> -->
 							</ul>
 						</nav>
 					</div><!-- //MENU -->
@@ -142,162 +146,44 @@
 
 <!-- PROJECTS -->
 		<section id="projects" class="padbot20">
-		
 			<!-- CONTAINER -->
 			<div class="container">
 				<h2><b>Actividades</b></h2>
 			</div><!-- //CONTAINER -->
-			
-				
 			<div class="projects-wrapper container" data-appear-top-offset="-200" data-animated="fadeInUp">
 				<!-- PROJECTS SLIDER -->
 				<div class="owl-demo owl-carousel projects_slider">
-					
-					<!-- work1 -->
-			<div class="item">
-				<div class="work_item">
-					<!-- <div class="card" style="width: 20rem;"> -->
-						<div class="work_img">
-  						<center><img src="images/actividad1.png" width="130" height="130" alt=""></center>
-  						<!-- <a class="zoom"  href="images/actividad1.png" rel="prettyPhoto[portfolio1]" ></a> -->
-  						</div>
+					<!--Actividades-->
+					<?php
+					require ('./Views/../Process/Actividad/ListarActividades.php');
 
-  						<div class="card-block">
-    					<h4 class="card-title">Card title</h4>
-    					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						</div>
-
-						<div class="work_description">
-							<div class="work_descr_cont">
-									<a href="#" class="btn btn-primary">Detalles</a>
-									<!-- <span>17 March, 2041</span> -->
-							</div>
-    					<!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-						</div>  						
-					<!-- </div> -->
-				</div>
-			</div>
-
-					<div class="item">
-						<div class="work_item">
-							<div class="work_img">
-								<img src="images/works/1.jpg" alt="" />
-								<a class="zoom" href="images/works/1.jpg" rel="prettyPhoto[portfolio1]" ></a>
-							</div>
-							<div class="work_description">
-								<div class="work_descr_cont">
-									<a href="portfolio-post.html" >Ginger Beast</a>
-									<span>17 March, 2041</span>
+					$acti = listar($_SESSION["idUsuario"]);
+						foreach ($acti as $elementos) { ?>
+							<div class='item'>
+								<div class='work_item'>
+									<div class='work_img'>
+						  				<center><img src='images/actividad1.png' width='130' height='130' alt=''></center>
+						  			</div>
+									<div class='card-block' id='<?php echo $elementos["idActividad"] ?>'>
+										<h4 class='card-title'><?php echo $elementos["Nombre"]; ?></h4>
+										<p class='card-text'><?php echo $elementos["Region"]; ?></p>
+									</div>
+									<div class='work_description'>
+										<div class='work_descr_cont'>
+											<a href="" class='btn'>Ver detalles</a>
+										</div>
+									</div>  						
 								</div>
 							</div>
-						</div>
-					</div><!-- //work1 -->
-					
-					<!-- work2 -->
-					<div class="item">
-						<div class="work_item">
-							<div class="work_img">
-								<img src="images/works/2.jpg" alt="" />
-								<a class="zoom" href="images/works/2.jpg" rel="prettyPhoto[portfolio1]" ></a>
-							</div>
-							<div class="work_description">
-								<div class="work_descr_cont">
-									<a href="portfolio-post.html" >Ginger Beast</a>
-									<span>17 March, 2041</span>
-								</div>
-							</div>
-						</div>
-					</div><!-- //work2 -->
-					
-					<!-- work3 -->
-					<div class="item">
-						<div class="work_item">
-							<div class="work_img">
-								<img src="images/works/3.jpg" alt="" />
-								<a class="zoom" href="images/works/3.jpg" rel="prettyPhoto[portfolio1]" ></a>
-							</div>
-							<div class="work_description">
-								<div class="work_descr_cont">
-									<a href="portfolio-post.html" >Ginger Beast</a>
-									<span>17 March, 2041</span>
-								</div>
-							</div>
-						</div>
-					</div><!-- //work3 -->
-					
-					<!-- work4 -->
-					<div class="item">
-						<div class="work_item">
-							<div class="work_img">
-								<img src="images/works/4.jpg" alt="" />
-								<a class="zoom" href="images/works/4.jpg" rel="prettyPhoto[portfolio1]" ></a>
-							</div>
-							<div class="work_description">
-								<div class="work_descr_cont">
-									<a href="portfolio-post.html" >Ginger Beast</a>
-									<span>17 March, 2041</span>
-								</div>
-							</div>
-						</div>
-					</div><!-- //work4 -->
-					
-					<!-- work5 -->
-					<div class="item">
-						<div class="work_item">
-							<div class="work_img">
-								<img src="images/works/5.jpg" alt="" />
-								<a class="zoom" href="images/works/5.jpg" rel="prettyPhoto[portfolio1]" ></a>
-							</div>
-							<div class="work_description">
-								<div class="work_descr_cont">
-									<a href="portfolio-post.html" >Ginger Beast</a>
-									<span>17 March, 2041</span>
-								</div>
-							</div>
-						</div>
-					</div><!-- //work5 -->
-					
-					<!-- work6 -->
-					<div class="item">
-						<div class="work_item">
-							<div class="work_img">
-								<img src="images/works/6.jpg" alt="" />
-								<a class="zoom" href="images/works/6.jpg" rel="prettyPhoto[portfolio1]" ></a>
-							</div>
-							<div class="work_description">
-								<div class="work_descr_cont">
-									<a href="portfolio-post.html" >Ginger Beast</a>
-									<span>17 March, 2041</span>
-								</div>
-							</div>
-						</div>
-					</div><!-- //work6 -->
-					
-					<!-- work7 -->
-					<div class="item">
-						<div class="work_item">
-							<div class="work_img">
-								<img src="images/works/7.jpg" alt="" />
-								<a class="zoom" href="images/works/7.jpg" rel="prettyPhoto[portfolio1]" ></a>
-							</div>
-							<div class="work_description">
-								<div class="work_descr_cont">
-									<a href="portfolio-post.html" >Ginger Beast</a>
-									<span>17 March, 2041</span>
-								</div>
-							</div>
-						</div>
-					</div><!-- //work7 -->
+					<?php } ?>
 				</div><!-- //PROJECTS SLIDER -->
 			</div>
 			
 			
 			<!-- OUR CLIENTS -->
 			<div class="our_clients">
-			
 				<!-- CONTAINER -->
 				<div class="container" data-appear-top-offset="-200" data-animated="fadeInUp">
-					
 					<!-- ROW -->
 					<div class="row">
 						<div class="col-lg-2 col-md-2 col-sm-2 client_img">
@@ -334,15 +220,10 @@
 	
 	<!-- FOOTER -->
 	<footer>
-			
 		<!-- CONTAINER -->
 		<div class="container">
-			
 			<!-- ROW -->
 			<div class="row" data-appear-top-offset="-200" data-animated="fadeInUp">
-				
-				
-				
 				<div class="col-lg-4 col-md-4 col-sm-6 padbot30 foot_about_block">
 					<h4><b>About</b> us</h4>
 					<p>We value people over profits, quality over quantity, and keeping it real. As such, we deliver an unmatched working relationship with our clients.</p>
@@ -355,12 +236,9 @@
 						<li><a href="javascript:void(0);" ><i class="map_show fa fa-map-marker"></i></a></li>
 					</ul>
 				</div>
-				
 				<div class="respond_clear"></div>
-				
 				<div class="col-lg-4 col-md-4 padbot30">
 					<h4><b>Contacts</b> Us</h4>
-					
 					<!-- CONTACT FORM -->
 					<div class="span9 contact_form">
 						<div id="note"></div>
@@ -379,18 +257,14 @@
 				
 				 <p>Crafted with <i class="fa fa-heart"></i>, <a href="http://designscrazed.org/" >Designscrazed</a></p>
 				</div>
-			
 			</div><!-- //ROW -->
 		</div><!-- //CONTAINER -->
 	</footer><!-- //FOOTER -->
-	
-	
 	<!-- MAP -->
 	<div id="map">
 		<a class="map_hide" href="javascript:void(0);"><i class="fa fa-angle-right"></i><i class="fa fa-angle-left"></i></a>
 		<iframe src="http://maps.google.com/maps?f=q&amp;give%20a%20hand=s_q&amp;hl=en&amp;geocode=&amp;q=london&amp;sll=37.0625,-95.677068&amp;sspn=42.631141,90.263672&amp;ie=UTF8&amp;hq=&amp;hnear=London,+United+Kingdom&amp;ll=51.500141,-0.126257&amp;spn=0.026448,0.039396&amp;z=14&amp;output=embed" ></iframe>
 	</div><!-- //MAP -->
-
 </div>
 </body>
 </html>

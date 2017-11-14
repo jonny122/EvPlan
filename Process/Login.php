@@ -7,7 +7,7 @@
 	$result = iniciarSesion($user,$pass);
 
 	session_start();
-
+	$_SESSION["idUsuario"] = $result["id"];
 	$_SESSION['user'] = $result['usuario'];
 	$_SESSION['rol'] = $result['rol'];
 
