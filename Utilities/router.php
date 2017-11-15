@@ -18,6 +18,9 @@
 		case 'actividad':
 			require "./Views/Actividad.php";
 			break;
+		case 'detalleActividad':
+			require "./Views/DetalleActividad.php";
+			break;
 		case 'tarea':
 			require "./Views/Tarea.php";
 			break;
