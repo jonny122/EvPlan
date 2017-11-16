@@ -1,5 +1,5 @@
 <?php
-	$id = $_POST["id"];
+	$id = $_POST["idTarea"];
 	session_start();
 	$_SESSION["id"] = $id;
 	require ('../../DA/Actividad/ListarDetallesActividades.php');
