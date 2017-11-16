@@ -1,5 +1,5 @@
 <?php session_set_cookie_params(0,"/");
-session_start(); 
+@session_start(); 
 if(!isset($_SESSION['idUsuario'])){
 	header('location: login');
 }
@@ -72,14 +72,6 @@ if(!isset($_SESSION['idUsuario'])){
 			});
 		});
 
-		
-		$(document).on('click', '#btnModi',function(){	
-			var id = $(this).val();
-			$("input[name='id']").val(id);
-			var id1 = $("input[name='id']").val();
-			$("#formActividad").submit();
-		});
-
 	</script>
 
 </head>
@@ -135,8 +127,7 @@ if(!isset($_SESSION['idUsuario'])){
 		<!-- BREADCRUMBS -->
 		<section class="breadcrumbs_block clearfix parallax">
 			<div class="container center">
-				<h2><b>Actividades</b> recientes</h2>
-				<p>Descubre cuales actividades fueron publicadas recientemente.</p>
+				<h2><b>Detalles</b> de tu actividad</h2>
 			</div>
 		</section><!-- //BREADCRUMBS -->
 		
@@ -146,40 +137,50 @@ if(!isset($_SESSION['idUsuario'])){
 		<section id="projects" class="padbot20">
 			<!-- CONTAINER -->
 			<div class="container">
-				<h2><b>Actividades</b></h2>
+				<h2><b>Detalles</b></h2>
 			</div><!-- //CONTAINER -->
 			<div class="projects-wrapper container" data-appear-top-offset="-200" data-animated="fadeInUp">
 				<!-- PROJECTS SLIDER -->
 				<div class="owl-demo owl-carousel projects_slider">
 					<!--Actividades-->
-					<?php
-					require ('./Views/../Process/Actividad/ListarActividades.php');
-
-					$acti = listar($_SESSION["idUsuario"]);
-						foreach ($acti as $elementos) { ?>
-							<div class='item'>
-								<div class='work_item'>
-									<div class='work_img'>
-						  				<center><img src='images/actividad1.png' width='130' height='130' alt=''></center>
-						  			</div>
-									<div class='card-block'>
-										<h4 class='card-title'>Actividad: <?php echo $elementos["Nombre"]; ?></h4>
-										<p class='card-text'>Región: <?php echo $elementos["Region"]; ?></p>
-									</div>
-									<div class='work_description'>
-										<div class='work_descr_cont'>
-											<form action="./Process/Actividad/ListarDetalleActividades.php" method="post" id="formActividad">
-												<input type="hidden" name="id" id="id" value="">
-											</form>
-											<button style="color: black;" value="<?php echo $elementos["idActividad"] ?>" id="btnModi" class='btn btn-primary'>Ver detalles</button>
-										</div>
-									</div>  						
-								</div>
-							</div>
-					<?php } ?>
 				</div><!-- //PROJECTS SLIDER -->
 			</div>
-			
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<?php
+						foreach ($_SESSION["DetallesActividad"] as $elementos) { ?>
+							<table class="table table-stripped table-bordered" style="size: 400px;">
+								<thead>
+									<tr>
+										<th style="display: none;">Id</th>
+										<th>Nombre</th>
+										<th>Region</th>
+										<th>Propósito</th>
+										<th>Requisito</th>
+										<th>Detalle</th>
+										<th># Personas Actual</th>
+										<th># Personas Esperadas</th>
+										<th>Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="display: none;"><?php echo $elementos["idActividad"]?></td>
+										<td><?php echo $elementos["Nombre"]?></td>
+										<td><?php echo $elementos["Region"]?></td>
+										<td><?php echo $elementos["Proposito"]?></td>
+										<td><?php echo $elementos["Requisito"]?></td>
+										<td><?php echo $elementos["Detalle"]?></td>
+										<td><?php echo $elementos["Cantidad_Persona"]?></td>
+										<td><?php echo $elementos["Cantidad_Total"]?></td>
+										<td>
+											<a href="javascript:void(0);"><span class="glyphicon glyphicon-pencil"></span></a>
+											<a href="javascript:void(0);"><span class="glyphicon glyphicon-trash"></span></a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+					<?php } ?>
+					</div>
 			
 			<!-- OUR CLIENTS -->
 			<div class="our_clients">

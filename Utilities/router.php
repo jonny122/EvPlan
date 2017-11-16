@@ -18,13 +18,19 @@
 		case 'actividad':
 			require "./Views/Actividad.php";
 			break;
+		case 'detalleActividad':
+			require "./Views/DetalleActividad.php";
+			break;
 		case 'tarea':
-			require "./Views/Tarea.php";
+			require "./Views/Tarea.php"; 
 			break;
 		case 'subtarea':
 			require "./Views/SubTarea.php";
 			break;
 		case 'crearCuenta':
+			require "./Views/RolUsuario.php";
+			break;
+		case 'RolUsuario':
 			require "./Views/RolUsuario.php";
 			break;
 		default:
