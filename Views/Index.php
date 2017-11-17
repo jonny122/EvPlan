@@ -298,10 +298,19 @@
 					<div class="span9 contact_form">
 						<div id="note"></div>
 						<div id="fields">
-							<form id="contact-form-face" class="clearfix" action="#">
-								<input type="text" name="name" value="Name" onFocus="if (this.value == 'Name') this.value = '';" onBlur="if (this.value == '') this.value = 'Name';" />
+							<form id="contact-form-face" class="clearfix" method="POST" action="Process/Usuario.php">
+								<!--<input type="text" name="name" value="Name" onFocus="if (this.value == 'Name') this.value = '';" onBlur="if (this.value == '') this.value = 'Name';" />
 								<textarea name="message" onFocus="if (this.value == 'Message') this.value = '';" onBlur="if (this.value == '') this.value = 'Message';">Message</textarea>
-								<input class="contact_btn" type="submit" value="Send message" />
+								<input class="contact_btn" type="submit" value="Send message" />-->
+								<input class="form-control" type="text" name="id" id="id" placeholder="Cédula"><br />
+								<input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre"><br />
+								<input class="form-control" type="text" name="apellido1" id="apellido1" placeholder="Apellido1"><br />
+								<input class="form-control" type="text" name="apellido2" id="apellido2" placeholder="Apellido2"><br />
+								<input class="form-control" type="text" name="correo" id="correo" placeholder="Correo"><br />
+								<input class="form-control" type="text" name="telefono" id="telefono" placeholder="Teléfono"><br />
+								<input type="hidden" name="action" id="action" value="registro" /> 
+								<button type="submit" >Enviar</button>
+								<a  href="javascript:void(0);" onclick="window.location = '/EvPlan/'">Regresar</a>
 							</form>
 						</div>
 					</div><!-- //CONTACT FORM -->

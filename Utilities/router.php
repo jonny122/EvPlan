@@ -22,12 +22,15 @@
 			require "./Views/DetalleActividad.php";
 			break;
 		case 'tarea':
-			require "./Views/Tarea.php";
+			require "./Views/Tarea.php"; 
 			break;
 		case 'subtarea':
-			require "./Views/SubTarea.php";
+			require "./Views/MostrarSubTarea.php";
 			break;
 		case 'crearCuenta':
+			require "./Views/RolUsuario.php";
+			break;
+		case 'RolUsuario':
 			require "./Views/RolUsuario.php";
 			break;
 		default:

@@ -1,5 +1,5 @@
 <?php
-	require ("../DA/Conexion.php");
+	require ("../../DA/Conexion.php");
 
 	function eliminarSubtarea($id){
 		$conn = Conectar();
