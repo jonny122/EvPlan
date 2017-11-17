@@ -1,10 +1,11 @@
 <?php
-	require ("../DA/Conexion.php");
+	require ("../../DA/Conexion.php");
 
-	function insertarTarea($usuario){
+	function insertarTarea($tarea){
 		$conn = Conectar();
+		$id=1;
 		$statement = $conn->prepare("CALL TAREA_INSERTAR(?,?,?,?,?,?,?,?)");
-		$statement->bind_param("issssiii", 0,$tarea['nombre'], $tarea['detalle'], $tarea['estado'], $tarea['requisitos'], $tarea['cantidad'], $tarea['total'], $tarea['idActividad']);
+		$statement->bind_param("issssiii", $id,$tarea['nombre'], $tarea['detalle'], $tarea['estado'], $tarea['requisitos'], $tarea['cantidad'], $tarea['total'], $tarea['idActividad']);
 		if(($statement->execute()) or die($conn->error)){
 			return true;
 		}

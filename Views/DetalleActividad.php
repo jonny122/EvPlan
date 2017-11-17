@@ -135,14 +135,12 @@ if(!isset($_SESSION['idUsuario'])){
 		<!-- BREADCRUMBS -->
 		<section class="breadcrumbs_block clearfix parallax">
 			<div class="container center">
-				<h2><b>Detalles</b> de tu actividad</h2>
+				<h2><b>Detalle</b> de tu actividad</h2>
 			</div>
 		</section><!-- //BREADCRUMBS -->
 		
 <!-- AQUI EMPIEZAN LAS ACTIVIDADES PUBLICADAS -->
-<<<<<<< HEAD
 
-=======
 <div class='work_description'>
 				<div class='work_descr_cont'>
 					<form action="./Process/Subtarea/ListarSubTarea.php" method="post" id="forSubTarea">
@@ -151,7 +149,7 @@ if(!isset($_SESSION['idUsuario'])){
 					<button style="color: black;" value="1" id="btnModi" class='btn btn-primary'>Ver detalles</button>
 				</div>
 			</div>
->>>>>>> 3bd6964ab03110c7078ac6ccd1105d22d988d2e1
+
 <!-- PROJECTS -->
 		<section id="projects" class="padbot20">
 			<!-- CONTAINER -->
