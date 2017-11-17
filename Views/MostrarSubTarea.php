@@ -386,7 +386,7 @@ function seleccionarTabla() {
 		var requisitos = $(_trEdit).find('td:eq(4)').text();
 		var cantidad = $(_trEdit).find('td:eq(5)').text();
 		var total = $(_trEdit).find('td:eq(6)').text();
-		var idTarea = $(_trEdit).find('td:eq(7)').text();
+		var idTarea = $(_trEdit).find('td:eq(7)').text(); 
 
 		$.ajax({
 			type: 'POST',
