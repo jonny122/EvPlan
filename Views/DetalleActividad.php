@@ -72,6 +72,12 @@ if(!isset($_SESSION['idUsuario'])){
 			});
 		});
 
+		$(document).on('click', '#btnModi',function(){	
+			var id = $(this).val();
+			$("input[name='id']").val(id);
+			var id1 = $("input[name='id']").val();//no
+			$("#forSubTarea").submit();
+		});
 	</script>
 
 </head>
@@ -131,8 +137,6 @@ if(!isset($_SESSION['idUsuario'])){
 			</div>
 		</section><!-- //BREADCRUMBS -->
 		
-<!-- AQUI EMPIEZAN LAS ACTIVIDADES PUBLICADAS -->
-
 <!-- PROJECTS -->
 		<section id="projects" class="padbot20">
 			<!-- CONTAINER -->
@@ -173,8 +177,8 @@ if(!isset($_SESSION['idUsuario'])){
 										<td><?php echo $elementos["Cantidad_Persona"]?></td>
 										<td><?php echo $elementos["Cantidad_Total"]?></td>
 										<td>
-											<a href="javascript:void(0);"><span class="glyphicon glyphicon-pencil"></span></a>
-											<a href="javascript:void(0);"><span class="glyphicon glyphicon-trash"></span></a>
+											<a href="javascript:void(0);" id="btnEdit"><span class="glyphicon glyphicon-pencil"></span></a>
+											<a href="javascript:void(0);" id="btnDelete"><span class="glyphicon glyphicon-trash"></span></a>
 										</td>
 									</tr>
 								</tbody>
@@ -268,5 +272,68 @@ if(!isset($_SESSION['idUsuario'])){
 		<iframe src="http://maps.google.com/maps?f=q&amp;give%20a%20hand=s_q&amp;hl=en&amp;geocode=&amp;q=london&amp;sll=37.0625,-95.677068&amp;sspn=42.631141,90.263672&amp;ie=UTF8&amp;hq=&amp;hnear=London,+United+Kingdom&amp;ll=51.500141,-0.126257&amp;spn=0.026448,0.039396&amp;z=14&amp;output=embed" ></iframe>
 	</div><!-- //MAP -->
 </div>
+<!--Modales -->
+<div class="modal fade" id="updateActividad" role="dialog">
+    <div class="modal-dialog">
+	    <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Agrega tú nueva actividad</h4>
+	        </div>
+	        <div class="modal-body">
+	        	<style>
+	        		form input{
+	        			border-style: none; !important
+	        		}
+	        	</style>
+	        	<form method="POST" action="./Process/Actividad/InsertarActividad.php">
+	        		<input type="hidden" id="id" name="id">
+					<input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre"><br />
+					<input class="form-control" type="text" name="region" id="region" placeholder="Región"><br />
+					<input class="form-control" type="text" name="proposito" id="proposito" placeholder="Propósito"><br />
+					<input class="form-control" type="text" name="requisito" id="requisito" placeholder="Requisito"><br />
+					<input class="form-control" type="text" name="detalle" id="detalle" placeholder="Detalle"><br />
+					<input class="form-control" type="text" name="cantidadPersona" id="cantidadPersona" placeholder="Cantidad inicial de Personas"><br />
+					<input class="form-control" type="text" name="cantidadTotal" id="cantidadTotal" placeholder="Cantidad total de Personas"><br />
+					<select name="idCategoria" id="idCategoria" class="form-control" placeholder="Seleccione un estado">
+						<option value=1>Abierto</option>
+						<option value=2>Cerrado</option>
+					</select>
+					<input type="hidden" name="idUsuario" id="idUsuario" value="<?php echo $_SESSION['idUsuario'];?>"><br />
+					<input type="hidden" name="action" id="action" value="registro" /> 
+	        </div>
+	        <div class="modal-footer">
+				<button type="submit" class="btn btn-success" style="width: 90px; height: 65px; color: white;">Enviar</button>
+	        	<button type="button" class="btn btn-default" data-dismiss="modal" style="width: 90px; height: 65px; color: white; background-color: gray;">Cerrar</button>
+	        </div>
+	        </form>
+	    </div>
+    </div>
+</div>
+<script>
+	function seleccionarTabla() {
+		var _trEdit = null;
+		$(document).on('click', '#btnEdit',function(){
+			_trEdit = $(this).closest('tr');
+			var _id = $(_trEdit).find('td:eq(0)').text();
+			var _nombre = $(_trEdit).find('td:eq(1)').text();
+			var _region = $(_trEdit).find('td:eq(2)').text();
+			var _proposito = $(_trEdit).find('td:eq(3)').text();
+			var _requisito = $(_trEdit).find('td:eq(4)').text();
+			var _detalle = $(_trEdit).find('td:eq(5)').text();
+			var _cantInicial = $(_trEdit).find('td:eq(6)').text();
+			var _cantTotal = $(_trEdit).find('td:eq(7)').text();
+					
+			$('input[name="id"]').val(_id);
+			$('input[name="nombre"]').val(_nombre);
+			$('input[name="region"]').val(_region);
+			$('input[name="proposito"]').val(_proposito);
+			$('input[name="requisito"]').val(_requisito);
+			$('input[name="detalle"]').val(_detalle);
+			$('input[name="cantidadPersona"]').val(_cantInicial);
+			$('input[name="cantidadTotal"]').val(_cantTotal);
+		});
+	}
+</script>
 </body>
 </html>

@@ -76,10 +76,9 @@ if(!isset($_SESSION['idUsuario'])){
 		$(document).on('click', '#btnModi',function(){	
 			var id = $(this).val();
 			$("input[name='id']").val(id);
-			var id1 = $("input[name='id']").val();
+			var id1 = $("input[name='id']").val();//no
 			$("#formActividad").submit();
 		});
-
 	</script>
 
 </head>
@@ -147,6 +146,7 @@ if(!isset($_SESSION['idUsuario'])){
 			<!-- CONTAINER -->
 			<div class="container">
 				<h2><b>Actividades</b></h2>
+				<button class="btn btn-success" id="btnAgregar" type="button"  data-toggle="modal" data-target="#addActividad" style="border-radius: 25px; width: 80px; height: 55px;"><span class="fa fa-plus fa-2x" style="color: white; size: 70px; margin-top: -25px;"></span> &nbsp;</button><br />
 			</div><!-- //CONTAINER -->
 			<div class="projects-wrapper container" data-appear-top-offset="-200" data-animated="fadeInUp">
 				<!-- PROJECTS SLIDER -->
@@ -266,6 +266,43 @@ if(!isset($_SESSION['idUsuario'])){
 		<a class="map_hide" href="javascript:void(0);"><i class="fa fa-angle-right"></i><i class="fa fa-angle-left"></i></a>
 		<iframe src="http://maps.google.com/maps?f=q&amp;give%20a%20hand=s_q&amp;hl=en&amp;geocode=&amp;q=london&amp;sll=37.0625,-95.677068&amp;sspn=42.631141,90.263672&amp;ie=UTF8&amp;hq=&amp;hnear=London,+United+Kingdom&amp;ll=51.500141,-0.126257&amp;spn=0.026448,0.039396&amp;z=14&amp;output=embed" ></iframe>
 	</div><!-- //MAP -->
+</div>
+<!--Modales -->
+<div class="modal fade" id="addActividad" role="dialog">
+    <div class="modal-dialog">
+	    <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Agrega tú nueva actividad</h4>
+	        </div>
+	        <div class="modal-body">
+	        	<style>
+	        		form input{
+	        			border-style: none; !important
+	        		}
+	        	</style>
+	        	<form method="POST" action="./Process/Actividad/InsertarActividad.php">
+					<input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre"><br />
+					<input class="form-control" type="text" name="region" id="region" placeholder="Región"><br />
+					<input class="form-control" type="text" name="proposito" id="proposito" placeholder="Porpósito"><br />
+					<input class="form-control" type="text" name="requisito" id="requisito" placeholder="Requisito"><br />
+					<input class="form-control" type="text" name="detalle" id="detalle" placeholder="Detalle"><br />
+					<input class="form-control" type="text" name="cantidadPersona" id="cantidadPersona" placeholder="Cantidad inicial de Personas"><br />
+					<input class="form-control" type="text" name="cantidadTotal" id="cantidadTotal" placeholder="Cantidad total de Personas"><br />
+					<select name="idCategoria" id="idCategoria" class="form-control" placeholder="Seleccione un estado">
+						<option value=1>Abierto</option>
+						<option value=2>Cerrado</option>
+					</select>
+					<input type="hidden" name="idUsuario" id="idUsuario" value="<?php echo $_SESSION['idUsuario'];?>"><br />
+					<input type="hidden" name="action" id="action" value="registro" /> 
+	        </div>
+	        <div class="modal-footer">
+				<button type="submit" class="btn btn-success" style="width: 90px; height: 65px; color: white;">Enviar</button>
+	        	<button type="button" class="btn btn-default" data-dismiss="modal" style="width: 90px; height: 65px; color: white; background-color: gray;">Cerrar</button>
+	        </div>
+	        </form>
+	    </div>
+    </div>
 </div>
 </body>
 </html>
