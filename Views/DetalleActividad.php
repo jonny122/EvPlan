@@ -72,6 +72,14 @@ if(!isset($_SESSION['idUsuario'])){
 			});
 		});
 
+
+		$(document).on('click', '#btnModi',function(){	
+			var id = $(this).val();
+			$("input[name='id']").val(id);
+			var id1 = $("input[name='id']").val();//no
+			$("#forSubTarea").submit();
+		});
+
 	</script>
 
 </head>
@@ -132,7 +140,18 @@ if(!isset($_SESSION['idUsuario'])){
 		</section><!-- //BREADCRUMBS -->
 		
 <!-- AQUI EMPIEZAN LAS ACTIVIDADES PUBLICADAS -->
+<<<<<<< HEAD
 
+=======
+<div class='work_description'>
+				<div class='work_descr_cont'>
+					<form action="./Process/Subtarea/ListarSubTarea.php" method="post" id="forSubTarea">
+						<input type="hidden" name="id" id="id" value="">
+					</form>
+					<button style="color: black;" value="1" id="btnModi" class='btn btn-primary'>Ver detalles</button>
+				</div>
+			</div>
+>>>>>>> 3bd6964ab03110c7078ac6ccd1105d22d988d2e1
 <!-- PROJECTS -->
 		<section id="projects" class="padbot20">
 			<!-- CONTAINER -->

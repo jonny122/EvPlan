@@ -1,5 +1,5 @@
 <?php session_set_cookie_params(0,"/");
-session_start(); 
+@session_start(); 
 if(!isset($_SESSION['idUsuario'])){
 	header('location: login');
 }
@@ -72,10 +72,9 @@ if(!isset($_SESSION['idUsuario'])){
 			});
 		});
 
-		
 		$(document).on('click', '#btnModi',function(){	
 			var id = $(this).val();
-			$("input[name='id']").val(id);
+			$("input[name='idTarea']").val(id);
 			var id1 = $("input[name='id']").val();//no
 			$("#formActividad").submit();
 		});
@@ -114,6 +113,7 @@ if(!isset($_SESSION['idUsuario'])){
 						</form>
 					</div><!-- SEARCH FORM -->
 					
+
 					<!-- MENU -->
 					<div class="pull-right">
 						<nav class="navmenu center">
@@ -135,8 +135,7 @@ if(!isset($_SESSION['idUsuario'])){
 		<!-- BREADCRUMBS -->
 		<section class="breadcrumbs_block clearfix parallax">
 			<div class="container center">
-				<h2><b>Actividades</b> recientes</h2>
-				<p>Descubre cuales actividades fueron publicadas recientemente.</p>
+				<h2><b>Lista</b> de sub tareas</h2>
 			</div>
 		</section><!-- //BREADCRUMBS -->
 		
@@ -146,40 +145,56 @@ if(!isset($_SESSION['idUsuario'])){
 		<section id="projects" class="padbot20">
 			<!-- CONTAINER -->
 			<div class="container">
-				<h2><b>Actividades</b></h2>
+				<h2><b>Sub Tareas</b></h2>
 			</div><!-- //CONTAINER -->
 			<div class="projects-wrapper container" data-appear-top-offset="-200" data-animated="fadeInUp">
 				<!-- PROJECTS SLIDER -->
 				<div class="owl-demo owl-carousel projects_slider">
 					<!--Actividades-->
-					<?php
-					require ('./Views/../Process/Actividad/ListarActividades.php');
-
-					$acti = listar($_SESSION["idUsuario"]);
-						foreach ($acti as $elementos) { ?>
-							<div class='item'>
-								<div class='work_item'>
-									<div class='work_img'>
-						  				<center><img src='images/actividad1.png' width='130' height='130' alt=''></center>
-						  			</div>
-									<div class='card-block'>
-										<h4 class='card-title'>Actividad: <?php echo $elementos["Nombre"]; ?></h4>
-										<p class='card-text'>Región: <?php echo $elementos["Region"]; ?></p>
-									</div>
-									<div class='work_description'>
-										<div class='work_descr_cont'>
-											<form action="./Process/Actividad/ListarDetalleActividades.php" method="post" id="formActividad">
-												<input type="hidden" name="id" id="id" value="">
-											</form>
-											<button style="color: black;" value="<?php echo $elementos["idActividad"] ?>" id="btnModi" class='btn btn-primary'>Ver detalles</button>
-										</div>
-									</div>  						
-								</div>
-							</div>
-					<?php } ?>
 				</div><!-- //PROJECTS SLIDER -->
 			</div>
+			 <button class="btn btn-success" id="btnAgregar" type="button"  data-toggle="modal" data-target="#modal-1"> <span class="glyphicon glyphicon-pencil"></span> &nbsp; Agregar sub tarea</button><br><br>
 			
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					
+							<table cellspacing="0" width="100%" id="example" class="table table-striped table-hover table-responsive" style="size: 400px;">
+								<thead>
+									<tr>
+										<th style="display: none;">Id</th>
+										<th>Nombre</th>
+										<th>Detalle</th>
+										<th>Estado</th>
+										<th>Requisito</th>
+										<th>Cantidad</th>
+										<th>Total</th>
+										<th style="display: none;">idTarea</th>
+										<th>Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+				<?php 
+				foreach ($_SESSION["listarDetalleSubTarea"] as $elementos) { ?>
+									<tr>
+										<td style="display: none;"><?php echo $elementos["idSubTarea"]?></td>
+										<td><?php echo $elementos["Nombre"]?></td>
+										<td><?php echo $elementos["Detalle"]?></td>
+										<td><?php echo $elementos["Estado"]?></td>
+										<td><?php echo $elementos["Requisitos"]?></td>
+										<td><?php echo $elementos["Cantidad"]?></td>
+										<td><?php echo $elementos["Total"]?></td>
+										<td style="display: none;"><?php echo $elementos["Tarea_idTarea"]?></td>
+										<td>
+											<a href="javascript:void(0);"><span class="glyphicon glyphicon-pencil"></span></a>
+											<a href="javascript:void(0);"><span class="glyphicon glyphicon-trash"></span></a>
+											<a href=""></a>
+										</td>
+									</tr>
+				<?php } ?>
+								</tbody>
+
+							</table>
+				
+					</div>
 			
 			<!-- OUR CLIENTS -->
 			<div class="our_clients">
@@ -266,6 +281,33 @@ if(!isset($_SESSION['idUsuario'])){
 		<a class="map_hide" href="javascript:void(0);"><i class="fa fa-angle-right"></i><i class="fa fa-angle-left"></i></a>
 		<iframe src="http://maps.google.com/maps?f=q&amp;give%20a%20hand=s_q&amp;hl=en&amp;geocode=&amp;q=london&amp;sll=37.0625,-95.677068&amp;sspn=42.631141,90.263672&amp;ie=UTF8&amp;hq=&amp;hnear=London,+United+Kingdom&amp;ll=51.500141,-0.126257&amp;spn=0.026448,0.039396&amp;z=14&amp;output=embed" ></iframe>
 	</div><!-- //MAP -->
+</div>
+<!--Inicio modal -->
+<div class="container">
+	<div class="modal fade" id="modal-1" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+				  	<button type 1="button" class="close" data-dismiss="modal">&times;</button>
+				 	<h3 class="modal-title">Agregar sub tarea</h3>
+				</div>
+				<div class="modal-body ">
+				<form method="POST" action="./Process/Subtarea/InsertarSubTarea.php">
+					<input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre"><br />
+					<input class="form-control" type="text" name="detalle" id="detalle" placeholder="Detalle"><br />
+					<input class="form-control" type="text" name="estado" id="estado" placeholder="Estado"><br />
+					<input class="form-control" type="text" name="requisitos" id="requisitos" placeholder="Requisitos"><br />
+					<input class="form-control" type="text" name="cantidad" id="cantidad" placeholder="Cantidad"><br />
+					<input class="form-control" type="text" name="total" id="total" placeholder="Total"><br />
+					<input class="form-control" type="text" name="idTarea" id="idTarea" placeholder="idTarea"><br />
+					<input type="hidden" name="action" id="action" value="registro" /> 
+					<button type="submit" class="btn btn-success">Agregar</button>
+					<a class="btn btn-primary" href="javascript:void(0);" onclick="window.location = '/EvPlan/'">Regresar</a>
+				</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 </body>
 </html>

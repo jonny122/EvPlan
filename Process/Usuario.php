@@ -11,7 +11,6 @@
     
 
 	function insertar(){
-
 		$id = $_POST['id'];
 		$nombre = $_POST['nombre'];
 		$apellido1 = $_POST['apellido1'];

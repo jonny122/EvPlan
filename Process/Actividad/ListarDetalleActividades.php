@@ -1,5 +1,6 @@
 <?php
-	$id = $_POST["id"];
+	$id = $_POST["idTarea"];
+
 	session_start();
 	$_SESSION["id"] = $id;
 	require ('../../DA/Actividad/ListarDetallesActividades.php');
@@ -8,5 +9,7 @@
 		$_SESSION["DetallesActividad"] = listarDetalleActividades($_SESSION["id"]);	
 	}
 	listar();
+
 	header("location: /EvPlan/detalleActividad"); 
+
 ?>
