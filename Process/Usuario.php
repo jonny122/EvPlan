@@ -11,7 +11,6 @@
     
 
 	function insertar(){
-
 		$id = $_POST['id'];
 		$nombre = $_POST['nombre'];
 		$apellido1 = $_POST['apellido1'];
@@ -21,7 +20,7 @@
 		$usuario = array('id' => $id, 'nombre' => $nombre, 'apellido1' => $apellido1, 'apellido2' => $apellido2, 'correo' => $correo, 'telefono' => $telefono); 
 		$result = insertarUsuario($usuario);
 		if($result == true){
-			header("Location: ../Views/RolUsuario.php");
+			header("Location: /EvPlan/crearCuenta");
 		}
 	}
 

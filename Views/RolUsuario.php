@@ -36,7 +36,7 @@
 	</header>
 	<div class="container">
 		<hr /><br />		
-		<form method="POST" action="../Process/RolUsuario.php">
+		<form method="POST" action="./Process/RolUsuario.php">
 			<input class="form-control" type="text" name="id" id="id" placeholder="Cédula"><br />
 			<input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre"><br />
 			<input class="form-control" type="password" name="passwor" id="passwor" placeholder="passwor"><br />
