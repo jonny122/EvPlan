@@ -1,5 +1,5 @@
 <?php
-	include ('../DA/Actividad/Insertar.php');
+	include ('../../DA/Actividad/Insertar.php');
 
 	$nombre = $_POST['nombre'];
 	$region = $_POST['region'];
@@ -12,9 +12,10 @@
 	$idUsuario =	$_POST['idUsuario'];
 	
 	$actividad = array('nombre' => $nombre, 'region' => $region, 'proposito' => $proposito, 'requisito' => $requisito, 'detalle' => $detalle, 'cantidadPersona' => $cantidadPersona, 'cantidadTotal' => $cantidadTotal, 'idCategoria' => $idCategoria, 'idUsuario' => $idUsuario); 
-		$result = insertarActividad($actividad);
-		if($result == true){
-			header("Location: ../Views/Tarea.php");
-		}
+
+	$result = insertarActividad($actividad);
+	if($result == true){
+		header("Location: /EvPlan/actividad");
+	}
 	
 ?>
