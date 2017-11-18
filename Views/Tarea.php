@@ -72,12 +72,11 @@ if(!isset($_SESSION['idUsuario'])){
 			});
 		});
 
-
-		$(document).on('click', '#btnModi',function(){	
+		$(document).on('click', '#btAgregar',function(){	
 			var id = $(this).val();
-			$("input[name='id']").val(id);
+			$("input[name='idTarea']").val(id);
 			var id1 = $("input[name='id']").val();//no
-			$("#forSubTarea").submit();
+			$("#formSubTarea").submit();
 		});
 
 	</script>
@@ -114,6 +113,7 @@ if(!isset($_SESSION['idUsuario'])){
 						</form>
 					</div><!-- SEARCH FORM -->
 					
+
 					<!-- MENU -->
 					<div class="pull-right">
 						<nav class="navmenu center">
@@ -135,7 +135,7 @@ if(!isset($_SESSION['idUsuario'])){
 		<!-- BREADCRUMBS -->
 		<section class="breadcrumbs_block clearfix parallax">
 			<div class="container center">
-				<h2><b>Tareas</b> de tu actividad</h2>
+				<h2><b>Lista</b> de tareas</h2>
 			</div>
 		</section><!-- //BREADCRUMBS -->
 		
@@ -145,52 +145,67 @@ if(!isset($_SESSION['idUsuario'])){
 		<section id="projects" class="padbot20">
 			<!-- CONTAINER -->
 			<div class="container">
-				<h2><b>Detalles</b></h2>
+				<h2><b>Tareas</b></h2>
 			</div><!-- //CONTAINER -->
 			<div class="projects-wrapper container" data-appear-top-offset="-200" data-animated="fadeInUp">
 				<!-- PROJECTS SLIDER -->
 				<div class="owl-demo owl-carousel projects_slider">
 					<!--Actividades-->
-					 <button class="btn btn-success" id="btnAgregar" type="button"  data-toggle="modal" data-target="#modal-1"> <span class="glyphicon glyphicon-pencil"></span> &nbsp; Agregar tarea</button><br><br>
-
-					 
 				</div><!-- //PROJECTS SLIDER -->
 			</div>
+			 <button class="btn btn-success" id="btnAgregar" type="button"  data-toggle="modal" data-target="#modal-1"> <span class="glyphicon glyphicon-pencil"></span> &nbsp; Agregar tarea</button><br><br>
+			
+			<div class='work_descr_cont'>
+					<form action="./Process/Tarea/listarDetalleTarea.php" method="post" id="forSubTarea">
+						<input type="hidden" name="id" id="id" value="">
+					</form>
+					<button style="color: black;" value="1" id="btnModi" class='btn btn-primary'>Ver detalles</button>
+				</div>
+
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<?php
-						foreach ($_SESSION["DetallesActividad"] as $elementos) { ?>
-							<table class="table table-stripped table-bordered" style="size: 400px;">
+					
+							<table cellspacing="0" width="100%" id="example" class="table table-striped table-hover table-responsive" style="size: 400px;">
 								<thead>
-									<tr>
+									<tr >
 										<th style="display: none;">Id</th>
 										<th>Nombre</th>
-										<th>Region</th>
-										<th>Propósito</th>
-										<th>Requisito</th>
 										<th>Detalle</th>
-										<th># Personas Actual</th>
-										<th># Personas Esperadas</th>
-										<th>Acciones</th>
+										<th>Estado</th>
+										<th>Requisito</th>
+										<th>Cantidad</th>
+										<th>Total</th>
+										<th style="display: none;">idTarea</th>
+										<th>Editar</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td style="display: none;"><?php echo $elementos["idActividad"]?></td>
-										<td><?php echo $elementos["Nombre"]?></td>
-										<td><?php echo $elementos["Region"]?></td>
-										<td><?php echo $elementos["Proposito"]?></td>
-										<td><?php echo $elementos["Requisito"]?></td>
-										<td><?php echo $elementos["Detalle"]?></td>
-										<td><?php echo $elementos["Cantidad_Persona"]?></td>
-										<td><?php echo $elementos["Cantidad_Total"]?></td>
-										<td>
+				<?php 
+				foreach ($_SESSION["listarDetalleTarea"] as $elementos) { ?>
+									<tr data-row-id="<?php echo $elementos['idTarea'];?>">
+										<td style="display: none;"><?php echo $elementos["idTarea"]?></td>
+										<td class="editable-col" contenteditable="true"><?php echo $elementos["Nombre"]?></td>
+										<td class="editable-col" contenteditable="true"><?php echo $elementos["Detalle"]?></td>
+										<td class="editable-col" contenteditable="true"><?php echo $elementos["Estado"]?></td>
+										<td class="editable-col" contenteditable="true"><?php echo $elementos["Requisitos"]?></td>
+										<td class="editable-col" contenteditable="true"><?php echo $elementos["Cantidad"]?></td>
+										<td class="editable-col" contenteditable="true"><?php echo $elementos["Total"]?></td>
+										<td style="display: none;"><?php echo $elementos["Actividad_idActividad"]?></td>
+										<!--<td>
 											<a href="javascript:void(0);"><span class="glyphicon glyphicon-pencil"></span></a>
-											<a href="javascript:void(0);"><span class="glyphicon glyphicon-trash"></span></a>
-										</td>
+											<a href="javascript:void(0);"><span id="edit-link" class=" glyphicon glyphicon-remove"></span></a>
+											<a href=""></a>
+										</td> -->
+										<td >
+											<button id="btnModi" onclick="seleccionarTabla()" class="btn btn-success">Editar</button>
+											<button id="btnEli" onclick="EliminarSubTarea()" class="btn btn-warning">Eliminar</button>
+            							</a></td>
+										
 									</tr>
+				<?php } ?>
 								</tbody>
+
 							</table>
-					<?php } ?>
+				
 					</div>
 			
 			<!-- OUR CLIENTS -->
@@ -279,9 +294,6 @@ if(!isset($_SESSION['idUsuario'])){
 		<iframe src="http://maps.google.com/maps?f=q&amp;give%20a%20hand=s_q&amp;hl=en&amp;geocode=&amp;q=london&amp;sll=37.0625,-95.677068&amp;sspn=42.631141,90.263672&amp;ie=UTF8&amp;hq=&amp;hnear=London,+United+Kingdom&amp;ll=51.500141,-0.126257&amp;spn=0.026448,0.039396&amp;z=14&amp;output=embed" ></iframe>
 	</div><!-- //MAP -->
 </div>
-</body>
-</html>
-
 <!--Inicio modal -->
 <div class="container">
 	<div class="modal fade" id="modal-1" role="dialog">
@@ -289,19 +301,19 @@ if(!isset($_SESSION['idUsuario'])){
 			<div class="modal-content">
 				<div class="modal-header">
 				  	<button type 1="button" class="close" data-dismiss="modal">&times;</button>
-				 	<h3 class="modal-title">Agregar Tarea</h3>
+				 	<h3 class="modal-title">Agregar sub tarea</h3>
 				</div>
 				<div class="modal-body ">
-				<form method="POST" action="./Process/Tarea/InsertarTarea.php">
+				<form method="POST" id="formSubTarea" action="./Process/Tarea/InsertarTarea.php">
 					<input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre"><br />
 					<input class="form-control" type="text" name="detalle" id="detalle" placeholder="Detalle"><br />
 					<input class="form-control" type="text" name="estado" id="estado" placeholder="Estado"><br />
 					<input class="form-control" type="text" name="requisitos" id="requisitos" placeholder="Requisitos"><br />
 					<input class="form-control" type="text" name="cantidad" id="cantidad" placeholder="Cantidad"><br />
 					<input class="form-control" type="text" name="total" id="total" placeholder="Total"><br />
-					<input class="form-control" type="text" name="idActividad" id="idActividad" placeholder="idActividad"><br />
+					<input class="form-control" type="text" name="idTarea" id="idTarea" placeholder="idTarea"><br />
 					<input type="hidden" name="action" id="action" value="registro" /> 
-					<button type="submit" class="btn btn-success">Agregar</button>
+					<button type="submit" nam="btAgregar" class="btn btn-success">Agregar</button>
 					<a class="btn btn-primary" href="javascript:void(0);" onclick="window.location = '/EvPlan/'">Regresar</a>
 				</form>
 				</div>
@@ -309,5 +321,137 @@ if(!isset($_SESSION['idUsuario'])){
 		</div>
 	</div>
 </div>
-<!-- fin del modal-->
 
+<!--Inicio modal -->
+<div class="container">
+	<div class="modal fade" id="modal-2" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+				  	<button type 1="button" class="close" data-dismiss="modal">&times;</button>
+				 	<h3 class="modal-title">Editar tarea</h3>
+				</div>
+				<div class="modal-body ">
+				<form method="POST" id="formSubTarea" action="./Process/Subtarea/InsertarSubTarea.php">
+					<input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre"><br />
+					<input class="form-control" type="text" name="detalle" id="detalle" placeholder="Detalle"><br />
+					<input class="form-control" type="text" name="estado" id="estado" placeholder="Estado"><br />
+					<input class="form-control" type="text" name="requisitos" id="requisitos" placeholder="Requisitos"><br />
+					<input class="form-control" type="text" name="cantidad" id="cantidad" placeholder="Cantidad"><br />
+					<input class="form-control" type="text" name="total" id="total" placeholder="Total"><br />
+					<input class="form-control" type="text" name="idTarea" id="idTarea" placeholder="idTarea"><br />
+					<input type="hidden" name="action" id="action" value="registro" /> 
+					<button type="submit" nam="btAgregar" class="btn btn-success">Agregar</button>
+					<a class="btn btn-primary" href="javascript:void(0);" onclick="window.location = '/EvPlan/'">Regresar</a>
+				</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+	$('#example').DataTable();
+	deshabilitar();
+	$.ajax({
+		type: 'POST',
+		url: '<?php echo URL;?>EvPlan/subtarea',
+		dataType: 'json',
+		success: function(response){
+			var tabla = $("#subTarea tbody").html('');
+			$.each(response, function(index, record){
+				var row = $("<tr />");
+				$("<td />").text(record.Fecha).appendTo(row);
+				$("<td />").text(record.Descripcion).appendTo(row);
+				$("<td />").text(record.Tratamiento).appendTo(row);
+				$("<td />").text(record.Examen).appendTo(row);
+				$("<td />").text(record.Hospitalizacion).appendTo(row);
+				row.appendTo('#diagnosticos');
+				filtrar();
+			})	
+		},
+		error: function(){
+			console.log("error");
+		}
+	});
+</script>
+
+<script type="text/javascript">
+
+
+
+function seleccionarTabla() {
+		var _trEdit = null;
+		$(document).on('click', '#btnModi',function(){
+		_trEdit = $(this).closest('tr');
+		var id = $(_trEdit).find('td:eq(0)').text();
+		var nombre = $(_trEdit).find('td:eq(1)').text();
+		var detalle = $(_trEdit).find('td:eq(2)').text();
+		var estado = $(_trEdit).find('td:eq(3)').text();
+		var requisitos = $(_trEdit).find('td:eq(4)').text();
+		var cantidad = $(_trEdit).find('td:eq(5)').text();
+		var total = $(_trEdit).find('td:eq(6)').text();
+		var idTarea = $(_trEdit).find('td:eq(7)').text();
+
+		$.ajax({
+			type: 'POST',
+			url: './Process/Subtarea/ActualizarSubTarea.php',
+			data: {'id': id, 
+             'nombre': nombre, 'detalle': detalle,'estado': estado,'requisitos': requisitos,
+        'cantidad': cantidad,'total': total,'idTarea': idTarea }, 
+			
+			success: function(data){
+				console.log(data);
+				alert('Datos modificados');
+				
+			},
+			error: function(err){
+				console.log(err);
+				
+			}
+		});
+		
+		}); 
+	}
+
+function EliminarSubTarea() {
+		var _trEdit = null;
+		$(document).on('click', '#btnEli',function(){
+		_trEdit = $(this).closest('tr');
+		var id = $(_trEdit).find('td:eq(0)').text();
+		
+
+		$.ajax({
+			type: 'POST',
+			url: './Process/Subtarea/EliminarSubTarea.php',
+			data: {'id': id }, 
+			
+			success: function(data){
+				console.log(data);
+				alert('Datos Eliminado');
+				  window.location ='subtarea'
+				
+			},
+			error: function(err){
+				console.log(err);
+				alert(err);
+			}
+		});
+		
+		}); 
+	}
+
+
+
+		$(document).on('click', '#btnModi',function(){	
+			var id = $(this).val();
+			$("input[name='id']").val(id);
+			var id1 = $("input[name='id']").val();//no
+			$("#forSubTarea").submit();
+		});
+
+
+</script>
+</body>
+</html>
