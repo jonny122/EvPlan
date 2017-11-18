@@ -1,5 +1,5 @@
 <?php
-	$id = $_POST["idTarea"];
+	$id = $_POST["id"];
 
 	session_start();
 	$_SESSION["id"] = $id;
