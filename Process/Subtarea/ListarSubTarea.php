@@ -6,9 +6,9 @@
 	 
 	require ('../../DA/Subtarea/listarSubTarea.php');
 	
-	function listarSubTarea($id){
+	function listarSubTarea(){
 		
-		$_SESSION["listarDetalleSubTarea"] = listarSubTareas($_SESSION["idTare"]);
+		$_SESSION["listarDetalleSubTarea"] = listarSubTareas(1);
 			
 	}
 	listarSubTarea();

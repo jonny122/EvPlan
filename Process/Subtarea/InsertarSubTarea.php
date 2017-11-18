@@ -14,7 +14,7 @@
 		$subtarea = array('nombre' => $nombre, 'detalle' => $detalle, 'estado' => $estado, 'requisitos' => $requisitos, 'cantidad' => $cantidad, 'total' => $total, 'idTarea' => $idTarea); 
 		$result = insertarSubtarea($subtarea);
 		if($result == true){
-			header("Location: /EvPlan/subtarea");
+			header("refresh:0 /EvPlan/subtarea");
 		}
 	
 	

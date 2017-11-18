@@ -72,11 +72,11 @@ if(!isset($_SESSION['idUsuario'])){
 			});
 		});
 
-		$(document).on('click', '#btAgregar',function(){	
+		$(document).on('click', '#btnModi',function(){	
 			var id = $(this).val();
 			$("input[name='idTarea']").val(id);
 			var id1 = $("input[name='id']").val();//no
-			$("#formSubTarea").submit();
+			$("#forCargarSubTarea").submit();
 		});
 
 	</script>
@@ -153,7 +153,18 @@ if(!isset($_SESSION['idUsuario'])){
 					<!--Actividades-->
 				</div><!-- //PROJECTS SLIDER -->
 			</div>
-			 <button class="btn btn-success" id="btnAgregar" type="button"  data-toggle="modal" data-target="#modal-1"> <span class="glyphicon glyphicon-pencil"></span> &nbsp; Agregar sub tarea</button><br><br>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				 <button class="btn btn-success" id="btnAgregar" type="button"  data-toggle="modal" data-target="#modal-1"> <span class="glyphicon glyphicon-pencil"></span> &nbsp; Agregar sub tarea</button><br><br>
+
+			
+			 <div class='work_descr_cont' style="display: none;">
+											<form action="./Process/Subtarea/ListarSubTarea.php" method="post" id="forCargarSubTarea">
+												<input type="hidden" name="id" id="id" value="">
+											</form>
+											<button style="color: black;" value="1" id="btnModi" class='btn btn-primary'>cargar sub tarea</button>
+										</div>
+			</div>
+			
 			
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					
@@ -307,7 +318,7 @@ if(!isset($_SESSION['idUsuario'])){
 					<input class="form-control" type="text" name="total" id="total" placeholder="Total"><br />
 					<input class="form-control" type="text" name="idTarea" id="idTarea" placeholder="idTarea"><br />
 					<input type="hidden" name="action" id="action" value="registro" /> 
-					<button type="submit" nam="btAgregar" class="btn btn-success">Agregar</button>
+					<button type="submit" name="btAgregar" class="btn btn-success">Agregar</button>
 					<a class="btn btn-primary" href="javascript:void(0);" onclick="window.location = '/EvPlan/'">Regresar</a>
 				</form>
 				</div>
@@ -344,32 +355,7 @@ if(!isset($_SESSION['idUsuario'])){
 	</div>
 </div>
 
-<script>
-	$(document).ready(function() {
-	$('#example').DataTable();
-	deshabilitar();
-	$.ajax({
-		type: 'POST',
-		url: '<?php echo URL;?>EvPlan/subtarea',
-		dataType: 'json',
-		success: function(response){
-			var tabla = $("#subTarea tbody").html('');
-			$.each(response, function(index, record){
-				var row = $("<tr />");
-				$("<td />").text(record.Fecha).appendTo(row);
-				$("<td />").text(record.Descripcion).appendTo(row);
-				$("<td />").text(record.Tratamiento).appendTo(row);
-				$("<td />").text(record.Examen).appendTo(row);
-				$("<td />").text(record.Hospitalizacion).appendTo(row);
-				row.appendTo('#diagnosticos');
-				filtrar();
-			})	
-		},
-		error: function(){
-			console.log("error");
-		}
-	});
-</script>
+
 
 <script type="text/javascript">
 
@@ -424,8 +410,8 @@ function EliminarSubTarea() {
 			success: function(data){
 				console.log(data);
 				alert('Datos Eliminado');
-				  window.location ='subtarea'
-				
+				 // window.location ='/EvPlan/subtarea'
+				$("#btnModi").trigger("click");
 			},
 			error: function(err){
 				console.log(err);
@@ -434,8 +420,18 @@ function EliminarSubTarea() {
 		});
 		
 		}); 
+
+		
+
+			
+
+
 	}
 
+	
+
+	
 </script>
+
 </body>
 </html>
