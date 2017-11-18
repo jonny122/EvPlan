@@ -5,7 +5,7 @@
 		$conn = Conectar();
 		$id=1;
 		$statement = $conn->prepare("CALL TAREA_INSERTAR(?,?,?,?,?,?,?,?)");
-		$statement->bind_param("issssiii", $id,$tarea['nombre'], $tarea['detalle'], $tarea['estado'], $tarea['requisitos'], $tarea['cantidad'], $tarea['total'], $tarea['idActividad']);
+		$statement->bind_param("isssiiis", $id,$tarea['nombre'], $tarea['estado'], $tarea['requisitos'], $tarea['cantidad'], $tarea['total'], $tarea['idActividad'], $tarea['detalle']);
 		if(($statement->execute()) or die($conn->error)){
 			return true;
 		}

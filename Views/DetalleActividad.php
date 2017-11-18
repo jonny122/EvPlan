@@ -73,11 +73,11 @@ if(!isset($_SESSION['idUsuario'])){
 			});
 		});
 
-		$(document).on('click', '#btnModi',function(){	
-			var id = $(this).val();
-			$("input[name='id']").val(id);
-			var id1 = $("input[name='id']").val();//no
-			$("#forSubTarea").submit();
+		$(document).on('click', '#btnEnv',function(){	
+			_trEdit = $(this).closest('tr');
+			var id = $(_trEdit).find('td:eq(0)').text();
+			$("input[name='idTarea']").val(id);
+			$("#enviarTarea").submit();
 		});
 	</script>
 
@@ -185,12 +185,16 @@ if(!isset($_SESSION['idUsuario'])){
 					 					<td>
 											<a href="javascript:void(0);" id="btnEdit" onclick="seleccionarTabla()"><span class="glyphicon glyphicon-pencil" style="font-size: 26px !important; "></span></a>
 											<a href="javascript:void(0);" id="btnDelete" onclick="eliminarActividad()"><span class="glyphicon glyphicon-remove" style="font-size: 26px !important; "></span></a>
+											<a href="javascript:void(0);" id="btnEnv" onclick="eliminarActividad()"><span class="glyphicon glyphicon-edit" style="font-size: 26px !important; "></span></a>
 										</td>
 									</tr>
 								</tbody>
 							</table>
 					<?php } ?>
 					</div><br />
+			<form id="enviarTarea" method="POST" action="./Process/Tarea/ListarDetalleTarea.php">
+				<input type="hidden" id="idTarea" name="idTarea">
+			</form>
 			<button class="btn btn-primary" onclick="window.location = '/EvPlan/actividad'" style="height: 55px !important; border-radius: 5px !important; font-size: 18px !important; color: white !important; padding-bottom: 35px !important;">Regresar</button>
 			<!-- OUR CLIENTS -->
 			<div class="our_clients">

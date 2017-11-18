@@ -72,11 +72,11 @@ if(!isset($_SESSION['idUsuario'])){
 			});
 		});
 
-		$(document).on('click', '#btAgregar',function(){	
-			var id = $(this).val();
-			$("input[name='idTarea']").val(id);
-			var id1 = $("input[name='id']").val();//no
-			$("#formSubTarea").submit();
+		$(document).on('click', '#enviarSubTarea',function(){	
+			_trEdit = $(this).closest('tr');
+			var _id = $(_trEdit).find('td:eq(0)').text();
+			$("input[name='idSubT']").val(_id);
+			$("#envSubTarea").submit();
 		});
 
 	</script>
@@ -146,6 +146,7 @@ if(!isset($_SESSION['idUsuario'])){
 			<!-- CONTAINER -->
 			<div class="container">
 				<h2><b>Tareas</b></h2>
+				<button class="btn btn-success" id="btnAgregar" type="button"  data-toggle="modal" data-target="#modal-1" style="border-radius: 25px; width: 80px; height: 55px;"><span class="fa fa-plus fa-2x" style="color: white; size: 70px; margin-top: -25px;"></span> &nbsp;</button><br />
 			</div><!-- //CONTAINER -->
 			<div class="projects-wrapper container" data-appear-top-offset="-200" data-animated="fadeInUp">
 				<!-- PROJECTS SLIDER -->
@@ -153,9 +154,8 @@ if(!isset($_SESSION['idUsuario'])){
 					<!--Actividades-->
 				</div><!-- //PROJECTS SLIDER -->
 			</div>
-			 <button class="btn btn-success" id="btnAgregar" type="button"  data-toggle="modal" data-target="#modal-1"> <span class="glyphicon glyphicon-pencil"></span> &nbsp; Agregar tarea</button><br><br>
 			
-			<div class='work_descr_cont'>
+			<div class='work_descr_cont' style="display: none;">
 					<form action="./Process/Tarea/listarDetalleTarea.php" method="post" id="forSubTarea">
 						<input type="hidden" name="id" id="id" value="">
 					</form>
@@ -198,6 +198,7 @@ if(!isset($_SESSION['idUsuario'])){
 										<td >
 											<button id="btnModi" onclick="seleccionarTabla()" class="btn btn-success">Editar</button>
 											<button id="btnEli" onclick="EliminarTarea()" class="btn btn-warning">Eliminar</button>
+											<button class="btn" id="enviarSubTarea">SubTareas</button>
             							</a></td>
 										
 									</tr>
@@ -207,7 +208,9 @@ if(!isset($_SESSION['idUsuario'])){
 							</table>
 				
 					</div>
-			
+			<form id="envSubTarea" method="POST" action="./Process/Subtarea/ListarSubTarea.php">
+				<input type="hidden" id="idSubT" name="idSubT">
+			</form>
 			<!-- OUR CLIENTS -->
 			<div class="our_clients">
 				<!-- CONTAINER -->

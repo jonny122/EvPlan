@@ -1,14 +1,14 @@
 <?php
 	//require ('./Subtarea/../Process/../DA/Subtarea/listarSubTarea.php');
-	$id = $_POST["id"];
+	$id = $_POST["idSubT"];
 	session_start();
-	$_SESSION["idTare"] = $id;
+	$_SESSION["idSubTare"] = $id;
 	 
 	require ('../../DA/Subtarea/listarSubTarea.php');
 	
 	function listarSubTarea(){
 		
-		$_SESSION["listarDetalleSubTarea"] = listarSubTareas(1);
+		$_SESSION["listarDetalleSubTarea"] = listarSubTareas($_SESSION["idSubTare"]);
 			
 	}
 	listarSubTarea();

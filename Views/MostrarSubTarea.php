@@ -146,6 +146,7 @@ if(!isset($_SESSION['idUsuario'])){
 			<!-- CONTAINER -->
 			<div class="container">
 				<h2><b>Sub Tareas</b></h2>
+				<button class="btn btn-success" id="btnAgregar" type="button"  data-toggle="modal" data-target="#modal-1" style="border-radius: 25px; width: 80px; height: 55px;"><span class="fa fa-plus fa-2x" style="color: white; size: 70px; margin-top: -25px;"></span> &nbsp;</button><br />
 			</div><!-- //CONTAINER -->
 			<div class="projects-wrapper container" data-appear-top-offset="-200" data-animated="fadeInUp">
 				<!-- PROJECTS SLIDER -->
@@ -154,7 +155,7 @@ if(!isset($_SESSION['idUsuario'])){
 				</div><!-- //PROJECTS SLIDER -->
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				 <button class="btn btn-success" id="btnAgregar" type="button"  data-toggle="modal" data-target="#modal-1"> <span class="glyphicon glyphicon-pencil"></span> &nbsp; Agregar sub tarea</button><br><br>
+				
 
 			
 			 <div class='work_descr_cont' style="display: none;">
@@ -163,9 +164,7 @@ if(!isset($_SESSION['idUsuario'])){
 											</form>
 											<button style="color: black;" value="1" id="btnModi" class='btn btn-primary'>cargar sub tarea</button>
 										</div>
-			</div>
-			
-			
+			</div> 
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					
 							<table cellspacing="0" width="100%" id="example" class="table table-striped table-hover table-responsive" style="size: 400px;">
