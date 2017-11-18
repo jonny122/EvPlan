@@ -1,5 +1,5 @@
 <?php
-	require ("../DA/Conexion.php");
+	require ("../../DA/Conexion.php");
 
 	function actualizarTarea($tarea){
 		$conn = Conectar();
@@ -14,5 +14,5 @@
 		$statement->close();
 		$conn->close(); 
 	}
-	
+
 ?>
