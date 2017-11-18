@@ -163,7 +163,7 @@ if(!isset($_SESSION['idUsuario'])){
 						  				<center><img src='images/actividad1.png' width='130' height='130' alt=''></center>
 						  			</div>
 									<div class='card-block'>
-										<h4 class='card-title'>Actividad: <?php echo $elementos["Nombre"]; ?></h4>
+										<h4 class='card-title'>Actividad: <?php echo $elementos["Nombre"];?></h4>
 										<p class='card-text'>Región: <?php echo $elementos["Region"]; ?></p>
 									</div>
 									<div class='work_description'>
@@ -278,13 +278,15 @@ if(!isset($_SESSION['idUsuario'])){
 	        <div class="modal-body">
 	        	<style>
 	        		form input{
-	        			border-style: none; !important
+	        			border-color: gray !important;
+	        			border-radius: 5px !important;
+	        			border-style: solid !important; 
 	        		}
 	        	</style>
 	        	<form method="POST" action="./Process/Actividad/InsertarActividad.php">
 					<input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre"><br />
 					<input class="form-control" type="text" name="region" id="region" placeholder="Región"><br />
-					<input class="form-control" type="text" name="proposito" id="proposito" placeholder="Porpósito"><br />
+					<input class="form-control" type="text" name="proposito" id="proposito" placeholder="Propósito"><br />
 					<input class="form-control" type="text" name="requisito" id="requisito" placeholder="Requisito"><br />
 					<input class="form-control" type="text" name="detalle" id="detalle" placeholder="Detalle"><br />
 					<input class="form-control" type="text" name="cantidadPersona" id="cantidadPersona" placeholder="Cantidad inicial de Personas"><br />

@@ -1,5 +1,5 @@
 <?php
-	include ('../DA/Actividad/Actualizar.php');
+	include ('../../DA/Actividad/Actualizar.php');
 
 	$id = $_POST['id'];
 	$nombre = $_POST['nombre'];
@@ -12,6 +12,7 @@
 	$idCategoria =	$_POST['idCategoria'];
 	$idUsuario =	$_POST['idUsuario'];
 	
-	$actividad = array('nombre' => $nombre, 'region' => $region, 'proposito' => $proposito, 'requisito' => $requisito, 'detalle' => $detalle, 'cantidadPersona' => $cantidadPersona, 'cantidadTotal' => $cantidadTotal, 'idCategoria' => $idCategoria, 'idUsuario' => $idUsuario); 
+	$actividad = array('id' => $id,'nombre' => $nombre, 'region' => $region, 'proposito' => $proposito, 'requisito' => $requisito, 'detalle' => $detalle, 'cantidadPersona' => $cantidadPersona, 'cantidadTotal' => $cantidadTotal, 'idCategoria' => $idCategoria, 'idUsuario' => $idUsuario); 
 		$result = actualizarActividad($actividad);
+	echo $result;
 ?>

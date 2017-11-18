@@ -43,6 +43,7 @@ if(!isset($_SESSION['idUsuario'])){
 	<script src="./Views/js/animate.js" type="text/javascript"></script>
 	<script src="./Views/js/jquery.BlackAndWhite.js"></script>
 	<script src="./Views/js/myscript.js" type="text/javascript"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<script>
 		
 		//PrettyPhoto
@@ -133,7 +134,8 @@ if(!isset($_SESSION['idUsuario'])){
 		<!-- BREADCRUMBS -->
 		<section class="breadcrumbs_block clearfix parallax">
 			<div class="container center">
-				<h2><b>Detalle</b> de tu actividad</h2>
+				<h2><b>Detalle</b> de tu actividad <?php
+				print_r($_SESSION["DetallesActividad"][0]["Nombre"]);?></h2><br />
 			</div>
 		</section><!-- //BREADCRUMBS -->
 		
@@ -152,7 +154,7 @@ if(!isset($_SESSION['idUsuario'])){
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<?php
 						foreach ($_SESSION["DetallesActividad"] as $elementos) { ?>
-							<table class="table table-stripped table-bordered" style="size: 400px;">
+							<table class="table table-stripped table-bordered" style="size: 400px; font-size: 20px;">
 								<thead>
 									<tr>
 										<th style="display: none;">Id</th>
@@ -163,29 +165,33 @@ if(!isset($_SESSION['idUsuario'])){
 										<th>Detalle</th>
 										<th># Personas Actual</th>
 										<th># Personas Esperadas</th>
+										<th>Estado</th>
 										<th>Acciones</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+									<tr data-row-id="<?php echo $elementos['idSubTarea'];?>">
 										<td style="display: none;"><?php echo $elementos["idActividad"]?></td>
-										<td><?php echo $elementos["Nombre"]?></td>
-										<td><?php echo $elementos["Region"]?></td>
-										<td><?php echo $elementos["Proposito"]?></td>
-										<td><?php echo $elementos["Requisito"]?></td>
-										<td><?php echo $elementos["Detalle"]?></td>
-										<td><?php echo $elementos["Cantidad_Persona"]?></td>
-										<td><?php echo $elementos["Cantidad_Total"]?></td>
-										<td>
-											<a href="javascript:void(0);" id="btnEdit"><span class="glyphicon glyphicon-pencil"></span></a>
-											<a href="javascript:void(0);" id="btnDelete"><span class="glyphicon glyphicon-trash"></span></a>
+										<td class="editable-col" contenteditable="true"><?php echo $elementos["Nombre"];?></td>
+										<td class="editable-col" contenteditable="true"><?php echo $elementos["Region"]?></td>
+										<td class="editable-col" contenteditable="true"><?php echo $elementos["Proposito"]?></td>
+										<td class="editable-col" contenteditable="true"><?php echo $elementos["Requisito"]?></td>
+										<td class="editable-col" contenteditable="true"><?php echo $elementos["Detalle"]?></td>
+										<td class="editable-col" contenteditable="true"><?php echo $elementos["Cantidad_Persona"]?></td>
+										<td class="editable-col" contenteditable="true"><?php echo $elementos["Cantidad_Total"]?></td>
+										<td class="editable-col" contenteditable="true"><?php echo $elementos["Estado"];?></td>
+										<td style="display: none;"><?php echo $elementos["Categoria_idCategoria"];?></td>
+										<td style="display: none;"><?php echo $elementos["Usuario_idUsuario"];?></td>
+					 					<td>
+											<a href="javascript:void(0);" id="btnEdit" onclick="seleccionarTabla()"><span class="glyphicon glyphicon-pencil" style="font-size: 26px !important; "></span></a>
+											<a href="javascript:void(0);" id="btnDelete" onclick="eliminarActividad()"><span class="glyphicon glyphicon-remove" style="font-size: 26px !important; "></span></a>
 										</td>
 									</tr>
 								</tbody>
 							</table>
 					<?php } ?>
-					</div>
-			
+					</div><br />
+			<button class="btn btn-primary" onclick="window.location = '/EvPlan/actividad'" style="height: 55px !important; border-radius: 5px !important; font-size: 18px !important; color: white !important; padding-bottom: 35px !important;">Regresar</button>
 			<!-- OUR CLIENTS -->
 			<div class="our_clients">
 				<!-- CONTAINER -->
@@ -273,43 +279,6 @@ if(!isset($_SESSION['idUsuario'])){
 	</div><!-- //MAP -->
 </div>
 <!--Modales -->
-<div class="modal fade" id="updateActividad" role="dialog">
-    <div class="modal-dialog">
-	    <div class="modal-content">
-	        <div class="modal-header">
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Agrega tú nueva actividad</h4>
-	        </div>
-	        <div class="modal-body">
-	        	<style>
-	        		form input{
-	        			border-style: none; !important
-	        		}
-	        	</style>
-	        	<form method="POST" action="./Process/Actividad/InsertarActividad.php">
-	        		<input type="hidden" id="id" name="id">
-					<input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre"><br />
-					<input class="form-control" type="text" name="region" id="region" placeholder="Región"><br />
-					<input class="form-control" type="text" name="proposito" id="proposito" placeholder="Propósito"><br />
-					<input class="form-control" type="text" name="requisito" id="requisito" placeholder="Requisito"><br />
-					<input class="form-control" type="text" name="detalle" id="detalle" placeholder="Detalle"><br />
-					<input class="form-control" type="text" name="cantidadPersona" id="cantidadPersona" placeholder="Cantidad inicial de Personas"><br />
-					<input class="form-control" type="text" name="cantidadTotal" id="cantidadTotal" placeholder="Cantidad total de Personas"><br />
-					<select name="idCategoria" id="idCategoria" class="form-control" placeholder="Seleccione un estado">
-						<option value=1>Abierto</option>
-						<option value=2>Cerrado</option>
-					</select>
-					<input type="hidden" name="idUsuario" id="idUsuario" value="<?php echo $_SESSION['idUsuario'];?>"><br />
-					<input type="hidden" name="action" id="action" value="registro" /> 
-	        </div>
-	        <div class="modal-footer">
-				<button type="submit" class="btn btn-success" style="width: 90px; height: 65px; color: white;">Enviar</button>
-	        	<button type="button" class="btn btn-default" data-dismiss="modal" style="width: 90px; height: 65px; color: white; background-color: gray;">Cerrar</button>
-	        </div>
-	        </form>
-	    </div>
-    </div>
-</div>
 <script>
 	function seleccionarTabla() {
 		var _trEdit = null;
@@ -323,17 +292,66 @@ if(!isset($_SESSION['idUsuario'])){
 			var _detalle = $(_trEdit).find('td:eq(5)').text();
 			var _cantInicial = $(_trEdit).find('td:eq(6)').text();
 			var _cantTotal = $(_trEdit).find('td:eq(7)').text();
-					
-			$('input[name="id"]').val(_id);
-			$('input[name="nombre"]').val(_nombre);
-			$('input[name="region"]').val(_region);
-			$('input[name="proposito"]').val(_proposito);
-			$('input[name="requisito"]').val(_requisito);
-			$('input[name="detalle"]').val(_detalle);
-			$('input[name="cantidadPersona"]').val(_cantInicial);
-			$('input[name="cantidadTotal"]').val(_cantTotal);
-		});
+			var _estadoText = $(_trEdit).find('td:eq(8)').text();
+			var _estado = $(_trEdit).find('td:eq(9)').text();
+			var _idUsuario = "<?php echo $_SESSION["idUsuario"];?>";
+			if(_estadoText == "Cerrado"){
+				_estado = "2";
+			}
+			else if(_estadoText != "Abierto" &&  _estadoText != "Cerrado"){
+				swal('Error','Los estados validos son "Abierto" y "Cerrado"','error');
+			}else{
+				var data = {'id': _id, 'nombre': _nombre, 'region': _region,'proposito': _proposito,'requisito': _requisito,'detalle': _detalle,'cantidadPersona': _cantInicial,'cantidadTotal': _cantTotal, 'idCategoria': _estado, "idUsuario": _idUsuario };
+
+				$.ajax({
+					type: 'POST',
+					url: './Process/Actividad/ActualizarActividad.php',
+					data: data, 
+					success: function(data){
+						console.log(data);
+						swal('Datos modificados', 'Los datos han sido modificados correctamente', "success");
+					},
+					error: function(err){
+						swal('Erro', 'Los datos no han sido modificados', "error");
+					}
+				});
+			}
+		}); 
 	}
+
+	function eliminarActividad() {
+		$(document).on('click', '#btnDelete',function(){
+		var _trEdit = null;
+		_trEdit = $(this).closest('tr');
+		var id = $(_trEdit).find('td:eq(0)').text();
+		swal({
+		  title: "Está seguro?",
+		  text: "Desea eliminar esta información!",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			$.ajax({
+				type: 'POST',
+				url: './Process/Actividad/EliminarActividad.php',
+				data: {'id': id }, 
+				success: function(data){
+					console.log(data);
+					swal('Datos Eliminados','Se ha eliminado correctamente la infomación',"success");
+					  window.location ='/EvPlan/actividad';
+				},
+				error: function(err){
+					console.log(err);
+					swal('Error','Los datos no han sido eliminados correctamente','error');
+				}
+			});
+		  } 
+		});
+	});	
+	}
+
 </script>
 </body>
 </html>
