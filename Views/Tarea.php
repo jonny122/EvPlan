@@ -197,7 +197,7 @@ if(!isset($_SESSION['idUsuario'])){
 										</td> -->
 										<td >
 											<button id="btnModi" onclick="seleccionarTabla()" class="btn btn-success">Editar</button>
-											<button id="btnEli" onclick="EliminarSubTarea()" class="btn btn-warning">Eliminar</button>
+											<button id="btnEli" onclick="EliminarTarea()" class="btn btn-warning">Eliminar</button>
             							</a></td>
 										
 									</tr>
@@ -294,69 +294,13 @@ if(!isset($_SESSION['idUsuario'])){
 		<iframe src="http://maps.google.com/maps?f=q&amp;give%20a%20hand=s_q&amp;hl=en&amp;geocode=&amp;q=london&amp;sll=37.0625,-95.677068&amp;sspn=42.631141,90.263672&amp;ie=UTF8&amp;hq=&amp;hnear=London,+United+Kingdom&amp;ll=51.500141,-0.126257&amp;spn=0.026448,0.039396&amp;z=14&amp;output=embed" ></iframe>
 	</div><!-- //MAP -->
 </div>
-<!--Inicio modal -->
-<div class="container">
-	<div class="modal fade" id="modal-1" role="dialog">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-				  	<button type 1="button" class="close" data-dismiss="modal">&times;</button>
-				 	<h3 class="modal-title">Agregar sub tarea</h3>
-				</div>
-				<div class="modal-body ">
-				<form method="POST" id="formSubTarea" action="./Process/Tarea/InsertarTarea.php">
-					<input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre"><br />
-					<input class="form-control" type="text" name="detalle" id="detalle" placeholder="Detalle"><br />
-					<input class="form-control" type="text" name="estado" id="estado" placeholder="Estado"><br />
-					<input class="form-control" type="text" name="requisitos" id="requisitos" placeholder="Requisitos"><br />
-					<input class="form-control" type="text" name="cantidad" id="cantidad" placeholder="Cantidad"><br />
-					<input class="form-control" type="text" name="total" id="total" placeholder="Total"><br />
-					<input class="form-control" type="text" name="idTarea" id="idTarea" placeholder="idTarea"><br />
-					<input type="hidden" name="action" id="action" value="registro" /> 
-					<button type="submit" nam="btAgregar" class="btn btn-success">Agregar</button>
-					<a class="btn btn-primary" href="javascript:void(0);" onclick="window.location = '/EvPlan/'">Regresar</a>
-				</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!--Inicio modal -->
-<div class="container">
-	<div class="modal fade" id="modal-2" role="dialog">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-				  	<button type 1="button" class="close" data-dismiss="modal">&times;</button>
-				 	<h3 class="modal-title">Editar tarea</h3>
-				</div>
-				<div class="modal-body ">
-				<form method="POST" id="formSubTarea" action="./Process/Subtarea/InsertarSubTarea.php">
-					<input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre"><br />
-					<input class="form-control" type="text" name="detalle" id="detalle" placeholder="Detalle"><br />
-					<input class="form-control" type="text" name="estado" id="estado" placeholder="Estado"><br />
-					<input class="form-control" type="text" name="requisitos" id="requisitos" placeholder="Requisitos"><br />
-					<input class="form-control" type="text" name="cantidad" id="cantidad" placeholder="Cantidad"><br />
-					<input class="form-control" type="text" name="total" id="total" placeholder="Total"><br />
-					<input class="form-control" type="text" name="idTarea" id="idTarea" placeholder="idTarea"><br />
-					<input type="hidden" name="action" id="action" value="registro" /> 
-					<button type="submit" nam="btAgregar" class="btn btn-success">Agregar</button>
-					<a class="btn btn-primary" href="javascript:void(0);" onclick="window.location = '/EvPlan/'">Regresar</a>
-				</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
 <script>
 	$(document).ready(function() {
 	$('#example').DataTable();
 	deshabilitar();
 	$.ajax({
 		type: 'POST',
-		url: '<?php echo URL;?>EvPlan/subtarea',
+		url: '<?php echo URL;?>EvPlan/tarea',
 		dataType: 'json',
 		success: function(response){
 			var tabla = $("#subTarea tbody").html('');
@@ -392,14 +336,14 @@ function seleccionarTabla() {
 		var requisitos = $(_trEdit).find('td:eq(4)').text();
 		var cantidad = $(_trEdit).find('td:eq(5)').text();
 		var total = $(_trEdit).find('td:eq(6)').text();
-		var idTarea = $(_trEdit).find('td:eq(7)').text();
+		var idActividad = $(_trEdit).find('td:eq(7)').text();
 
 		$.ajax({
 			type: 'POST',
-			url: './Process/Subtarea/ActualizarSubTarea.php',
+			url: './Process/Tarea/ActualizarTarea.php',
 			data: {'id': id, 
              'nombre': nombre, 'detalle': detalle,'estado': estado,'requisitos': requisitos,
-        'cantidad': cantidad,'total': total,'idTarea': idTarea }, 
+        'cantidad': cantidad,'total': total,'idActividad': idActividad }, 
 			
 			success: function(data){
 				console.log(data);
@@ -415,7 +359,7 @@ function seleccionarTabla() {
 		}); 
 	}
 
-function EliminarSubTarea() {
+function EliminarTarea() {
 		var _trEdit = null;
 		$(document).on('click', '#btnEli',function(){
 		_trEdit = $(this).closest('tr');
@@ -424,13 +368,13 @@ function EliminarSubTarea() {
 
 		$.ajax({
 			type: 'POST',
-			url: './Process/Subtarea/EliminarSubTarea.php',
+			url: './Process/Tarea/EliminarTarea.php',
 			data: {'id': id }, 
 			
 			success: function(data){
 				console.log(data);
 				alert('Datos Eliminado');
-				  window.location ='subtarea'
+				  window.location ='tarea'
 				
 			},
 			error: function(err){
@@ -441,17 +385,41 @@ function EliminarSubTarea() {
 		
 		}); 
 	}
-
-
-
 		$(document).on('click', '#btnModi',function(){	
 			var id = $(this).val();
 			$("input[name='id']").val(id);
 			var id1 = $("input[name='id']").val();//no
-			$("#forSubTarea").submit();
+			$("#forTarea").submit();
 		});
-
-
 </script>
 </body>
 </html>
+
+<!--Inicio modal -->
+<div class="container">
+	<div class="modal fade" id="modal-1" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+				  	<button type 1="button" class="close" data-dismiss="modal">&times;</button>
+				 	<h3 class="modal-title">Agregar tarea</h3>
+				</div>
+				<div class="modal-body ">
+				<form method="POST" id="formSubTarea" action="./Process/Tarea/InsertarTarea.php">
+					<input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre"><br />
+					<input class="form-control" type="text" name="detalle" id="detalle" placeholder="Detalle"><br />
+					<input class="form-control" type="text" name="estado" id="estado" placeholder="Estado"><br />
+					<input class="form-control" type="text" name="requisitos" id="requisitos" placeholder="Requisitos"><br />
+					<input class="form-control" type="text" name="cantidad" id="cantidad" placeholder="Cantidad"><br />
+					<input class="form-control" type="text" name="total" id="total" placeholder="Total"><br />
+					<input class="form-control" type="text" name="idActividad" id="idActividad" placeholder="idActividad"><br />
+					<input type="hidden" name="action" id="action" value="registro" /> 
+					<button type="submit" nam="btAgregar" class="btn btn-success">Agregar</button>
+					<a class="btn btn-primary" href="javascript:void(0);" onclick="window.location = '/EvPlan/'">Regresar</a>
+				</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- fin del modal-->

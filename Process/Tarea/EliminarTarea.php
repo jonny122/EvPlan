@@ -1,6 +1,7 @@
 <?php 
-	function eliminar(){
+include ('../../DA/Tarea/Eliminar.php');
+	
 		$id = $_POST['id'];
-		$result = eliminarUsuario($usuario);
-	}
+		$result = eliminarTarea($id);
+	
  ?>
